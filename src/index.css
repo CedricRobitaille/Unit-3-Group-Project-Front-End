@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* 
+!IMPORTANT
+
+All sizing should be done through `rem`s.
+By default, 1rem = 16px.
+
+If the wireframe requests padding: 8px;
+Then you must do padding: .5rem;
+
+*/
+
 :root {
   --white-100: #ffffff; /* Primary White */
   --white-75: #ffffffcc; /* White 75% */
@@ -16,8 +29,7 @@
   --accent-20: #2e443d; /* Accent 25% */
   --acent-10: #18332B; /* Accent 10% */
 
-  
-  --green-glow: 0px 0px 22px -8px rgb(36, 148, 114, .125);
+  --green-glow: 0px 0px 22px -8px rgb(36, 148, 114, .125); /* Default Flow - For box-shadow: ---; */
 }
 
 * {
@@ -27,14 +39,23 @@
 }
 
 html {
-
+  background-color: var(--black-100);
 }
 
-body {
-
-}
-
-h1, h2, h3, h4, h5, h6, p, li, ul, a, input, select, textarea {
-  font-family: sans-serif;
+h1, h2, h3 {
   color: var(--white-100);
+
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
+
+h4, h5, h6, p, li, ul, a, input, select, textarea {
+  color: var(--white-100);
+
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
