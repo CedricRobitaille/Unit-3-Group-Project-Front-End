@@ -3,7 +3,7 @@
 
 ---
 
-> Lovingly(???) crafted by:
-> Cedric Robitaille
-> Justin Clark
+> Lovingly(???) crafted by: <br>
+> Cedric Robitaille, <br>
+> Justin Clark, <br>
 > Eric Segev
