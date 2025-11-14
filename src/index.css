@@ -13,21 +13,22 @@ Then you must do padding: .5rem;
 
 :root {
   --white-100: #ffffff; /* Primary White */
-  --white-75: #ffffffcc; /* White 75% */
-  --white-50: #ffffff88; /* White 50% */
-  --white-25: #ffffff55; /* White 25% */
+  --white-75: #ecf5f1cc; /* White 75% (text not-selected)*/
+  --white-50: #c4e0d788; /* White 50% (text placeholder/locked)*/
+  --white-25: #bae2d355; /* White 25% (text hidden)*/
 
   --black-100: #131716; /* Primary Black */
-  --black-90: #191D1C; /* Black Level 1 */
-  --black-80: #1F2422; /* Black Level 2 */
-  --black-80: #232b28; /* Black Level 3 */
-  --black-50: #26302D; /* Accent Black */
+  --black-90: #191D1C; /* Black Level 1 (card outer background)*/
+  --black-80: #1F2422; /* Black Level 2 (card inner background)*/
+  --black-70: #232b27; /* Black Level 3 (card sub-element bg)*/
+  --black-60: #26302D; /* Black Level 4 (card sub-element-inner bg)*/
+  --black-50: #2f3b38; /* Accent Black (card border)*/
 
   --accent-50: #3DFFC5; /* Primary Accent */
-  --accent-40: #339477; /* Accent 75% */
-  --accent-30: #3C5E53; /* Accent 50% */
-  --accent-20: #2e443d; /* Accent 25% */
-  --acent-10: #18332B; /* Accent 10% */
+  --accent-40: #339477; /* Accent 75% (Accent light fade)*/
+  --accent-30: #3C5E53; /* Accent 50% (Accent Avg fade)*/
+  --accent-20: #2e443d; /* Accent 25% (Accent high fade)*/
+  --accent-10: #18332b70; /* Accent 10% (Accent seasoning)*/
 
   --green-glow: 0px 0px 22px -8px rgb(36, 148, 114, .125); /* Default Flow - For box-shadow: ---; */
 }
@@ -59,3 +60,11 @@ h4, h5, h6, p, li, ul, a, input, select, textarea {
   font-variation-settings: "wdth" 100;
 }
 
+::placeholder {
+  color: var(--white-50);
+}
+
+input {
+  background-color: var(--black-60);
+  border: 1.5px solid var(--black-50);
+}

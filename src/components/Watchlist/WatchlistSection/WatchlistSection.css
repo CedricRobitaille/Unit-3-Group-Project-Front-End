@@ -1,0 +1,11 @@
+.watchlist-section {
+
+}
+
+.watchlist-section-header {
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--white-50);
+  font-weight: 500;
+  padding: 1rem;
+}

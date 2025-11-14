@@ -1,0 +1,19 @@
+.watchlist-ticker-id {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  max-width: 11.5rem;
+  min-width: 5.25rem;
+  width: 100%;
+}
+
+.watchlist-ticker-id h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.watchlist-ticker-id p {
+  font-size: .85rem;
+  color: var(--white-50);
+  font-weight: 300;
+}

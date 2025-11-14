@@ -1,0 +1,23 @@
+.watchlist-ticker-value {
+  display: flex;
+  flex-direction: column;
+  gap: .125rem;
+  text-align: right;
+  min-width: 9ch;
+  width: 100%;
+}
+
+.watchlist-ticker-value h5 {
+font-size: 1.25rem;
+font-weight: 700;
+overflow: hidden;
+white-space: nowrap;
+}
+
+.watchlist-ticker-value h6 {
+  font-size: 1rem;
+  color: var(--accent-50);
+  font-weight: 600;
+  overflow: hidden;
+    white-space: nowrap;
+}
