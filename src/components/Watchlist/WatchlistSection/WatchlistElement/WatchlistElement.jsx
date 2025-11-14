@@ -4,14 +4,19 @@ import WatchlistTickerId from "./WatchlistTickerId/WatchlistTickerId";
 import WatchlistGraph from "./WatchlistGraph/WatchlistGraph";
 import WatchlistTickerValue from "./WatchlistTickerValue/WatchlistTickerValue";
 
-const WatchlistElement = () => {
+const WatchlistElement = ({elementData}) => {
+
+  const name = elementData.name;
+  const ticker = elementData.ticker;
+  const value = elementData.value;
+  const change = elementData.change;
 
   return (
     <article className="watchlist-element-outer">
       <div className="watchlist-element-inner">
-        <WatchlistTickerId />
+        <WatchlistTickerId name={name} ticker={ticker} />
         <WatchlistGraph />
-        <WatchlistTickerValue />
+        <WatchlistTickerValue value={value} change={change} />
       </div>
     </article>
   )

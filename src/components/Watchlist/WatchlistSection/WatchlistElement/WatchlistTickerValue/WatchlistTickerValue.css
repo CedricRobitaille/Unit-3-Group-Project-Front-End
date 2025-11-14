@@ -1,7 +1,7 @@
 .watchlist-ticker-value {
   display: flex;
   flex-direction: column;
-  gap: .25rem;
+  gap: .125rem;
   text-align: right;
   min-width: 9ch;
   width: 100%;

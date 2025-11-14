@@ -1,13 +1,12 @@
 import "./WatchlistTickerId.css"
 
-const WatchlistTickerId = (props) => {
+const WatchlistTickerId = ({ name, ticker }) => {
   
   return (
     <div className="watchlist-ticker-id">
-      <h4>AAPL</h4>
-      <p>Apple, Inc</p>
+      <h4>{ticker}</h4>
+      <p>{name}</p>
     </div>
-    
   )
 }
 

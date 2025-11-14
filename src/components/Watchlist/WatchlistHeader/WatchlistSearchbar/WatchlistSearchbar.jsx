@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import "./WatchlistSearchbar.css"
 
-const WatchlistSearchbar = () => {
+const WatchlistSearchbar = ({ handleSearchResults }) => {
 
   const [searchValue, setSearchValue] = useState("");
   
@@ -13,6 +13,9 @@ const WatchlistSearchbar = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault()
     console.log("Searching for: ", searchValue)
+
+
+    handleSearchResults()
   }
 
   return (

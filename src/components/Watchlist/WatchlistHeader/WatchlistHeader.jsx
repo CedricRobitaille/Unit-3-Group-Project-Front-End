@@ -3,12 +3,12 @@ import "./WatchlistHeader.css"
 import WatchlistSearchbar from "./WatchlistSearchbar/WatchlistSearchbar"
 import WatchlistTitle from "./WatchlistTitle/WatchlistTitle"
 
-const WatchlistHeader = () => {
+const WatchlistHeader = ({ handleSearchResults }) => {
   
   return (
     <div className="watchlist-header">
       <WatchlistTitle />
-      <WatchlistSearchbar />
+      <WatchlistSearchbar handleSearchResults={handleSearchResults} />
     </div>
   )
 }

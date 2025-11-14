@@ -1,18 +1,12 @@
 import "./WatchlistTickerValue.css"
 
-const WatchlistTickerValue = (props) => {
-  // const tickerValue = props.tickerValue;
-  // const tickerChange = props.tickerChange;
-
-  const tickerValue = 30.125;
-  const tickerChange = "+12.25";
+const WatchlistTickerValue = ({ value, change }) => {
 
   return (
     <div className="watchlist-ticker-value">
-      <h5>{tickerValue}</h5>
-      <h6>{tickerChange}</h6>
+      <h5>{value}</h5>
+      { change > 0 ? <h6>+{change}</h6> : <h6>{change}</h6> }
     </div>
-    
   )
 }
 
