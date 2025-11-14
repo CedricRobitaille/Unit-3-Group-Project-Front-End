@@ -28,7 +28,7 @@ Then you must do padding: .5rem;
   --accent-40: #339477; /* Accent 75% */
   --accent-30: #3C5E53; /* Accent 50% */
   --accent-20: #2e443d; /* Accent 25% */
-  --acent-10: #18332B; /* Accent 10% */
+  --accent-10: #18332b70; /* Accent 10% */
 
   --green-glow: 0px 0px 22px -8px rgb(36, 148, 114, .125); /* Default Flow - For box-shadow: ---; */
 }

@@ -1,0 +1,16 @@
+.watchlist-element-outer {
+  padding: 0 .75rem;
+}
+
+.watchlist-element-outer:hover {
+  background-color: var(--accent-10);
+}
+
+.watchlist-element-inner {
+  padding: 1rem .5rem;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1.25px solid var(--black-50)
+}
