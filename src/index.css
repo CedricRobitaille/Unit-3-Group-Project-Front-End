@@ -60,11 +60,11 @@ h4, h5, h6, p, li, ul, a, input, select, textarea {
   font-variation-settings: "wdth" 100;
 }
 
-::placeholder {
-  color: var(--white-50);
-}
-
 input {
   background-color: var(--black-60);
   border: 1.5px solid var(--black-50);
+}
+
+::placeholder {
+  color: var(--white-50);
 }

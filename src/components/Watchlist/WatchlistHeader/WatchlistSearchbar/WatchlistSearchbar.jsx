@@ -1,4 +1,6 @@
 import { useState } from "react"
+import fetchDaily from "../../../../services/Dailies.js"
+import { index } from "../../../../services/TargetService.js"
 
 import "./WatchlistSearchbar.css"
 
@@ -10,12 +12,14 @@ const WatchlistSearchbar = ({ handleSearchResults }) => {
     setSearchValue(event.target.value);
   }
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault()
     console.log("Searching for: ", searchValue)
+    handleSearchResults(await fetchDaily(searchValue))
 
 
-    handleSearchResults()
+    index();
+
   }
 
   return (
