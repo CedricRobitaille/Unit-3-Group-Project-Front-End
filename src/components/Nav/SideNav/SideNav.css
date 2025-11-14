@@ -1,0 +1,93 @@
+aside {
+  padding: 2rem 1rem;
+  border-right: 0.06rem solid #2A2E2D;
+  background-color: var(--black-90);
+  /* handle later index.css (maybe with grid) */
+  position: fixed;
+  top: 0;
+  left: 0;  
+  height: 100vh;
+}
+
+aside nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+}
+
+aside button {
+  color: var(--white-50);
+  display: flex;
+  align-items: center;
+  background-color: var(--black-90);
+  border: none;
+
+
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul button:hover {
+  background-color: var(--black-80);
+}
+
+h5 {
+  color: var(--white-50);
+  margin-bottom: 0.7rem;
+}
+
+.general {
+  flex-grow: 1;
+}
+
+.logo,
+.general,
+.preferences {
+  height: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.preferences {
+  margin-bottom: 3rem;
+}
+
+.logo button {
+  padding-left: 0.5rem;
+  height: 3rem;
+  width: 16rem;
+  gap: 1.2rem;
+  font-size: 1.5rem;
+  color: var(--white-75);
+  
+}
+
+.logo .icon {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 0.5rem;
+  border: 0.13rem solid var(--white-75);
+}
+
+.general button,
+.preferences button {
+  height: 3rem;
+  width: 16rem;
+  gap: 1.2rem;
+  padding-left: 1rem;
+  font-size: 1rem;
+}
+
+.general .icon,
+.preferences .icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  border: 0.13rem solid var(--white-50);
+}
