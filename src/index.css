@@ -13,15 +13,16 @@ Then you must do padding: .5rem;
 
 :root {
   --white-100: #ffffff; /* Primary White */
-  --white-75: #ffffffcc; /* White 75% */
-  --white-50: #ffffff88; /* White 50% */
-  --white-25: #ffffff55; /* White 25% */
+  --white-75: #ecf5f1cc; /* White 75% */
+  --white-50: #c4e0d788; /* White 50% */
+  --white-25: #bae2d355; /* White 25% */
 
   --black-100: #131716; /* Primary Black */
   --black-90: #191D1C; /* Black Level 1 */
   --black-80: #1F2422; /* Black Level 2 */
-  --black-80: #232b28; /* Black Level 3 */
-  --black-50: #26302D; /* Accent Black */
+  --black-70: #232b27; /* Black Level 3 */
+  --black-60: #26302D; /* Black Level 4 */
+  --black-50: #2f3b38; /* Accent Black */
 
   --accent-50: #3DFFC5; /* Primary Accent */
   --accent-40: #339477; /* Accent 75% */
