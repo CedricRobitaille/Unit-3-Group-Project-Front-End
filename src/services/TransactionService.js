@@ -23,9 +23,6 @@ const index = async () => {
  * @returns Transaction Information
  */
 const create = async (transactionData) => {
-  // Date/time the transaction was submitted.
-  transactionData.purchaseDate = Date.now();
-
   try {
     const response = await fetch(BASE_URL, {
       method: 'POST',
