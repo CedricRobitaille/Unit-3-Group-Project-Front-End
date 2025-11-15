@@ -2,13 +2,15 @@ import "./SideNav.css"
 
 const SideNav = (props) => {
 
+  const {currentPage, handleNavigation} = props;
+
   return (
     <aside>
-      <nav>
+      <nav className="side-nav">
         <div className="logo">
         <ul> 
           <li>
-            <button onClick={() => { handlePageNavigation("account") }}>
+            <button onClick={() => { handleNavigation("General", "Dashboard") }}>
               <div className="icon"></div>
               Loxley.com
             </button>
@@ -19,19 +21,28 @@ const SideNav = (props) => {
           <h5>GENERAL</h5>
           <ul>
             <li>
-              <button onClick={() => { handlePageNavigation("dashboard") }}>
+              <button 
+                onClick={() => { handleNavigation("General", "Dashboard") }}
+                className={currentPage === "Dashboard" ? "active" : ""}
+              >
                 <div className="icon"></div>
                 Dashboard
               </button>
             </li>
             <li>
-              <button onClick={() => { handlePageNavigation("portfolio") }}>
+              <button 
+                onClick={() => { handleNavigation("General", "Portfolio") }}
+                className={currentPage === "Portfolio" ? "active" : ""}
+              >
                 <div className="icon"></div>
                 Portfolio
               </button>
             </li>
             <li>
-              <button onClick={() => { handlePageNavigation("marketData") }}>
+              <button 
+                onClick={() => { handleNavigation("General", "MarketData") }}
+                className={currentPage === "MarketData" ? "active" : ""}
+              >
                 <div className="icon"></div>
                 Market Data
               </button>
@@ -42,13 +53,19 @@ const SideNav = (props) => {
           <h5>PREFERENCES</h5>
           <ul> 
             <li>
-              <button onClick={() => { handlePageNavigation("account") }}>
+              <button 
+                onClick={() => { handleNavigation("Preferences", "Account") }}
+                className={currentPage === "Account" ? "active" : ""}
+              >
                 <div className="icon"></div>
                 Account
               </button>
             </li>
             <li>
-              <button onClick={() => { handlePageNavigation("settings") }}>
+              <button 
+                onClick={() => { handleNavigation("Preferences", "Settings") }}
+                className={currentPage === "Settings" ? "active" : ""}
+              >
                 <div className="icon"></div>
                 Settings
               </button>
