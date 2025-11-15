@@ -1,0 +1,37 @@
+.top-nav {
+  border-bottom: 0.06rem solid #2A2E2D;;
+  background-color: var(--black-90);
+  height: 3rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 2rem;
+  color: var(--white-50);
+  font-size: 1.5rem;
+}
+
+.top-nav ul {
+  list-style: none;
+}
+
+.top-nav li {
+  color: var(--white-50);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.top-nav button {
+  color: var(--white-50);
+  display: flex;
+  align-items: center;
+  background-color: var(--black-90);
+  border: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.top-nav .active-page {
+  color: var(--accent-40);
+  font-weight: 700;
+}
