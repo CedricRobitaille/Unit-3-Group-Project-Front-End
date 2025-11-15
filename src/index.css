@@ -95,3 +95,28 @@ input {
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--black-60);
 }
+
+#root {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr;
+}
+
+#root > aside {
+  height: 100vh;
+}
+
+#root > main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+#root > main > nav {
+  /* border: 5px solid blue; */
+}
+
+#root > main > section {
+  /* border: 5px solid green; */
+}
