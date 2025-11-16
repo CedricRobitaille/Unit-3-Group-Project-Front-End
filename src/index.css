@@ -30,6 +30,8 @@ Then you must do padding: .5rem;
   --accent-20: #2e443d; /* Accent 25% (Accent high fade)*/
   --accent-10: #18332b70; /* Accent 10% (Accent seasoning)*/
 
+  --accent-2nd: #FF7E7E; /* Secondary Accent */
+
   --green-glow: 0px 0px 22px -8px rgb(36, 148, 114, .125); /* Default Flow - For box-shadow: ---; */
 }
 
