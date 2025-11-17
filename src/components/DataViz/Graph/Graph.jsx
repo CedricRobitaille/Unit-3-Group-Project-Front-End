@@ -59,7 +59,7 @@ const CustomTooltip = ({ active, payload }) => {
     return null;
 };
 
-const Graph = () => {
+const Graph = (props) => {
     const ticker = 'AAPL';
     const recordCount = 100;
 
@@ -96,7 +96,7 @@ const Graph = () => {
                     <p className="text-gray-600 mb-6">High/Low range with Close price line</p> */}
 
                     <ResponsiveContainer width="100%" height={400}>
-                        <ComposedChart data={data}>
+                        <ComposedChart data={data} margin={{top: 20, right: 15}}>
                             {/* <CartesianGrid strokeDasharray="3 3" /> */}
                             <XAxis
                                 dataKey="timestamp"
@@ -123,7 +123,7 @@ const Graph = () => {
                                 content={<CustomTooltip />}
                                 cursor={{ stroke: '#3DFFC5', strokeWidth: 1, strokeDasharray: '5 5' }}
                             />
-                            <Legend />
+                            {/* <Legend /> */}
 
                             {/* Close line */}
                             <Line

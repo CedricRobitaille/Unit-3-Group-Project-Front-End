@@ -59,6 +59,7 @@ const Watchlist = () => {
         // Only recommend tickers not already in watchlist.
         if (!savedPairs.includes(rec)) { // Runs through array of saved pairs, and only passes when it doesn't match current recommendation ticker
           const recommendation = parseData(await fetchDaily(rec)) // Parse the data into something consumable.
+          console.log(`recommendation: ${recommendation}`)
           recommendationsArray.push(recommendation) // Add it to the array of recommendations
         }
       }

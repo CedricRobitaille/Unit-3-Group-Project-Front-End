@@ -15,7 +15,7 @@ const WatchlistElement = ({elementData}) => {
     <article className="watchlist-element-outer">
       <div className="watchlist-element-inner">
         <WatchlistTickerId name={name} ticker={ticker} />
-        <WatchlistGraph />
+        <WatchlistGraph ticker={ticker} />
         <WatchlistTickerValue value={value} change={change} />
       </div>
     </article>

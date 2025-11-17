@@ -1,3 +1,7 @@
 #root {
   
 }
+
+.dashboard {
+    display: flex;
+}
