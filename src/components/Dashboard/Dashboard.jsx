@@ -13,8 +13,14 @@ const Dashboard = () => {
 
   const [graphRange, setGraphRange] = useState(7)
   const [portfolioValues, setPortfolioValues] = useState({
-    totalPortfolioValue: 0,
-    portfolioValueChange: 0,
+    currValue: 0,
+    prevValue: 0,
+    changePercent: 0,
+    changeValue: 0,
+  })
+  const [watchListValues, setWatchListValues] = useState({
+    currValue: 0,
+    prevValue: 0,
     changePercent: 0,
     changeValue: 0,
   })
@@ -86,11 +92,37 @@ const Dashboard = () => {
       console.log("PORTFOLIO: ", portfolio)
     }
 
-    const fetchWatchlistData = async () => {
 
+
+    // Fetches all values from the user's Watchlist!
+    // Data to be used in watchlist modal, and top-cards.
+    const fetchWatchlistData = async () => {
+      const watchlistData = await fetchWatchlist()  // Grab all watchlist elements (All that comes is `ticker`)
+
+      const watchlist = { // Default Structure/fallback values
+        currValue: 0,
+        prevValue: 0,
+        changePercent: 0,
+        changeValue: 0,
+        targets: [],  // Holds all stocks's dailies, where each stock is a new index.
+      }
+
+      // Iterate through each watchlist element, and sum up values into the watchlist component.
+      for (const target of watchlistData) {
+        const dataDailies = await fetchDaily(target.ticker, graphRange)
+        watchlist.targets.push(dataDailies)  // Keep all dailies
+
+        watchlist.currValue += parseValue(dataDailies.values[0].close); // Current Value
+        watchlist.prevValue += parseValue(dataDailies.previousClose); // Previous Value
+        watchlist.changeValue = parseValue(watchlist.currValue - watchlist.prevValue);  // Total Change in $
+        watchlist.changePercent = parseValue((watchlist.currValue - watchlist.prevValue) / watchlist.prevValue * 100);  // Total Change in %
+      }
+      setWatchListValues(watchlist)
+      console.log("FINAL watchlist OBJ: ", watchlist)
     }
+
     fetchPortfolioData()
-    fetchPortfolioData()
+    fetchWatchlistData()
   }, [])
 
   return (
@@ -98,8 +130,8 @@ const Dashboard = () => {
       <div className="card-container">
         <Card pillText="Portfolio" pillData={portfolioValues.changePercent} cardText={portfolioValues.currValue} />
         <Card pillText="Today" pillData={portfolioValues.changePercent} cardText={portfolioValues.changeValue} />
-        <Card />
-        <Card />
+        <Card pillText="Watchlist" pillData={watchListValues.changePercent} cardText={watchListValues.currValue} />
+        <Card pillText="Watchlist Change" pillData={watchListValues.changePercent} cardText={watchListValues.changeValue} />
       </div>
       
       <PortfolioTrendLine />
