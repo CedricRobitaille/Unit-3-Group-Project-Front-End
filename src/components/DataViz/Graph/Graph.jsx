@@ -60,20 +60,25 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const Graph = (props) => {
-    const ticker = 'AAPL';
-    const recordCount = 100;
+    const searchData = props.searchData;
+    const type = props.type;
+
+    // console.log(`type: ${type}, searchData: ${JSON.stringify(searchData)}`);
+    
+    // const ticker = 'AAPL';
+    // const recordCount = 100;
 
     //data state
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const loadData = () => {
             //fetch data
-            const apiData = await index(ticker, recordCount);
-            console.log(apiData.values);
+            // const apiData = await index(ticker, recordCount);
+            // console.log(apiData.values);
 
             // Transform data
-            const transformedData = apiData.values.map(item => ({
+            const transformedData = searchData.map(item => ({
                 timestamp: item.timestampId,
                 high: item.high,
                 low: item.low,
@@ -85,7 +90,7 @@ const Graph = (props) => {
             setData(transformedData);
         };
 
-        fetchData();
+        loadData();
     }, []);
 
     return (
@@ -95,19 +100,20 @@ const Graph = (props) => {
                     {/* <h1 className="text-2xl font-bold text-gray-800 mb-2">Recharts - OHLC Data</h1>
                     <p className="text-gray-600 mb-6">High/Low range with Close price line</p> */}
 
-                    <ResponsiveContainer width="100%" height={400}>
-                        <ComposedChart data={data} margin={{top: 20, right: 15}}>
+                    <ResponsiveContainer width="100%" height={type === 'small' ? 50 : 400}>
+                        <ComposedChart data={data} margin={type === 'small' ? {top: 5, left: 5, bottom: 5, right: 5} : {top: 20, right: 15}}>
                             {/* <CartesianGrid strokeDasharray="3 3" /> */}
                             <XAxis
                                 dataKey="timestamp"
                                 tickFormatter={formatDate}
                                 angle={-45}
                                 textAnchor="end"
-                                tick={{ fill: '#3DFFC5' }}
+                                tick={{ fill: '#3DFFC5'  }}
                                 stroke='none'
                                 label=""
                                 height={80}
-                                interval={15} 
+                                interval={15}
+                                hide={type === 'small' ? true : false}
                             />
                             <YAxis
                                 datakey='close'
@@ -118,15 +124,18 @@ const Graph = (props) => {
                                 tickFormatter={(value) => {
                                     return value % 1 === 0 ? value : value.toFixed(1);
                                 }}
+                                hide={type === 'small' ? true : false}
                             />
-                            <Tooltip 
+                            {type === 'small' ? '' : <Tooltip 
                                 content={<CustomTooltip />}
                                 cursor={{ stroke: '#3DFFC5', strokeWidth: 1, strokeDasharray: '5 5' }}
-                            />
+                            
+                            />}
+                            
                             {/* <Legend /> */}
 
                             {/* Close line */}
-                            <Line
+                            {/* <Line
                                 type="monotone"
                                 dataKey='close'
                                 stroke='#3DFFC5'
@@ -134,7 +143,7 @@ const Graph = (props) => {
                                 dot={false}
                                 legendType="none"
 
-                            />
+                            /> */}
                             {/* High line - lighter */}
                             <Line
                                 type="monotone"
@@ -144,6 +153,7 @@ const Graph = (props) => {
                                 strokeOpacity={0.4}
                                 dot={false}
                                 name="High"
+                                hide={type === 'small' ? true : false}
                             />
 
                             {/* Low line - lighter */}
@@ -155,6 +165,7 @@ const Graph = (props) => {
                                 strokeOpacity={0.4}
                                 dot={false}
                                 name="Low"
+                                hide={type === 'small' ? true : false}
                             />
 
                             {/* Close price line - solid and prominent */}
@@ -164,7 +175,7 @@ const Graph = (props) => {
                                 stroke='#3DFFC5'
                                 strokeWidth={2}
                                 dot={false}
-                                activeDot={{ r: 6, fill: '#3DFFC5', stroke: '#fff', strokeWidth: 2 }}
+                                activeDot={type === 'small' ? false : { r: 6, fill: '#3DFFC5', stroke: '#fff', strokeWidth: 2 }}
                                 name="Close"
                             />
                         </ComposedChart>
