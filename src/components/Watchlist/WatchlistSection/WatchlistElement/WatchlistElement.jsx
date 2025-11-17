@@ -10,12 +10,13 @@ const WatchlistElement = ({elementData}) => {
   const ticker = elementData.ticker;
   const value = elementData.value;
   const change = elementData.change;
+  const searchData = elementData.searchData;
 
   return (
     <article className="watchlist-element-outer">
       <div className="watchlist-element-inner">
         <WatchlistTickerId name={name} ticker={ticker} />
-        <WatchlistGraph />
+        <WatchlistGraph searchData={searchData} />
         <WatchlistTickerValue value={value} change={change} />
       </div>
     </article>
