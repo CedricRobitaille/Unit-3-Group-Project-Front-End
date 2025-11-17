@@ -29,6 +29,7 @@ const Watchlist = () => {
     searchData.ticker = data.symbol;
     searchData.value = data.values[0].close.toFixed(2);
     searchData.change = (data.values[0].close - data.previousClose).toFixed(3);
+    searchData.searchData = data.values;
     return searchData
   }
 
@@ -58,8 +59,7 @@ const Watchlist = () => {
       for (const rec of recommendations) {
         // Only recommend tickers not already in watchlist.
         if (!savedPairs.includes(rec)) { // Runs through array of saved pairs, and only passes when it doesn't match current recommendation ticker
-          const recommendation = parseData(await fetchDaily(rec)) // Parse the data into something consumable.
-          console.log(`recommendation: ${recommendation}`)
+          const recommendation = parseData(await fetchDaily(rec, 90)) // Parse the data into something consumable.
           recommendationsArray.push(recommendation) // Add it to the array of recommendations
         }
       }
@@ -74,7 +74,7 @@ const Watchlist = () => {
 
       // Go through each element from the user's saved watchlist array.
       for (const pair of watchlistTickers) {
-        const parsedPair = parseData(await fetchDaily(pair));  // Parse the data so that it can be consumed.
+        const parsedPair = parseData(await fetchDaily(pair,90));  // Parse the data so that it can be consumed.
         savedPairsArray.push(parsedPair); // Add the completed pair to the collection of user's pairs.
       }
       setWishlistSaved(savedPairsArray) // Set the state to showcase the saved pairs.
