@@ -3,9 +3,7 @@ import { useState } from 'react';
 import './App.css'
 import SideNav from './components/Nav/SideNav/SideNav'
 import TopNav from './components/Nav/TopNav/TopNav';
-import Watchlist from './components/Watchlist/Watchlist';
-import PortfolioTrendLine from './components/PortfolioTrendLine/PortfolioTrendLine';
-import Card from './components/Card/Card';
+import Dashboard from './components/Dashboard/Dashboard';
 
 
 function App() {
@@ -29,11 +27,8 @@ function App() {
           currentSection={currentSection}
           currentPage={currentPage}
         />
-        <section >
-            <Card />
-            <PortfolioTrendLine />
-            <Watchlist />
-        </section>
+        <Dashboard />
+        
       </main>
     </>
   )
