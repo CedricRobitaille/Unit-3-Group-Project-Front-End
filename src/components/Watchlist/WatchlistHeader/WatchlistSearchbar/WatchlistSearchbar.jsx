@@ -15,7 +15,7 @@ const WatchlistSearchbar = ({ handleSearchResults }) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault()
     console.log("Searching for: ", searchValue)
-    handleSearchResults(await fetchDaily(searchValue))
+    handleSearchResults(await fetchDaily(searchValue, 90))
 
 
     index();
