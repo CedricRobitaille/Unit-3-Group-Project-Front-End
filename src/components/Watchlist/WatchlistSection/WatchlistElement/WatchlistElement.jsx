@@ -6,11 +6,11 @@ import WatchlistTickerValue from "./WatchlistTickerValue/WatchlistTickerValue";
 
 const WatchlistElement = ({elementData}) => {
 
-  const name = elementData.name;
-  const ticker = elementData.ticker;
-  const value = elementData.value;
-  const change = elementData.change;
-  const searchData = elementData.searchData;
+  const name = elementData.longName;
+  const ticker = elementData.symbol;
+  const value = parseFloat(elementData.values[0].close.toFixed(2));
+  const change = parseFloat((elementData.values[0].close - elementData.previousClose).toFixed(3));
+  const searchData = elementData.values;
 
   return (
     <article className="watchlist-element-outer">

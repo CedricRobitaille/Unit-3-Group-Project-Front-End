@@ -5,7 +5,6 @@ const BASE_URL = "http://localhost:3000/targets/";
  * @returns All watchlist targets
  */
 const index = async () => {
-  console.log("THIS")
   try {
     const response = await fetch(BASE_URL);
     const data = await response.json()

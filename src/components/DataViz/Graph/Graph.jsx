@@ -74,7 +74,7 @@ const Graph = (props) => {
     useEffect(() => {
         const loadData = () => {
             //fetch data
-            // const apiData = await index(ticker, recordCount);
+            const apiData = await index(ticker, recordCount);
             // console.log(apiData.values);
 
             // Transform data
