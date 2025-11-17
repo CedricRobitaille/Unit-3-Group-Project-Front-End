@@ -1,13 +1,16 @@
 
 import { useState, useEffect } from 'react'
 import Graph from '../DataViz/Graph/Graph';
+import './PortfolioTrendLine.css'
 
 const PortfolioTrendLine = () => {
 
     return (
-        <div className="graphContainer">
-            <Graph />
-        </div>
+        <section className="portfolio-tend-line-outer">
+            <div className="portfolio-tend-line-inner">
+                <Graph />
+            </div>
+        </section>
     );
 }
 

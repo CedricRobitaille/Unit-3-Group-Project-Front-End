@@ -5,6 +5,7 @@ import SideNav from './components/Nav/SideNav/SideNav'
 import TopNav from './components/Nav/TopNav/TopNav';
 import Watchlist from './components/Watchlist/Watchlist';
 import PortfolioTrendLine from './components/PortfolioTrendLine/PortfolioTrendLine';
+import Card from './components/Card/Card';
 
 
 function App() {
@@ -19,19 +20,20 @@ function App() {
 
   return (
     <>
-      <SideNav 
-        currentPage={currentPage} 
+      <SideNav
+        currentPage={currentPage}
         handleNavigation={handleNavigation}
       />
       <main>
-        <TopNav 
-          currentSection={currentSection} 
-          currentPage={currentPage} 
+        <TopNav
+          currentSection={currentSection}
+          currentPage={currentPage}
         />
-        <section>
-          <Watchlist />
-          <PortfolioTrendLine />
-        </section> 
+        <section >
+            <Card />
+            <PortfolioTrendLine />
+            <Watchlist />
+        </section>
       </main>
     </>
   )
