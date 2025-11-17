@@ -23,8 +23,6 @@ const Dashboard = () => {
     prevValue: 0,
     changePercent: 0,
     changeValue: 0,
-    tickers: [],
-    targets: []
   })
 
   // Cleans up a value to be consumable
@@ -64,9 +62,6 @@ const Dashboard = () => {
         })
       }
 
-      // ==================================================================
-      // ! ERIC - Below is where the combined `dailies` for the portfolio graph is happening
-      // ==================================================================
       // Merge all owned stocks dailies into a `totalledDailies` array (where every day is combined values for all stocks)
       for (let day = 0; day < graphRange; day++) {  // Iterrate through every day
         let closeTotal = 0;
@@ -110,14 +105,12 @@ const Dashboard = () => {
         changePercent: 0,
         changeValue: 0,
         targets: [],  // Holds all stocks's dailies, where each stock is a new index.
-        tickers: []
       }
 
       // Iterate through each watchlist element, and sum up values into the watchlist component.
       for (const target of watchlistData) {
         const dataDailies = await fetchDaily(target.ticker, graphRange)
         watchlist.targets.push(dataDailies)  // Keep all dailies
-        watchlist.tickers.push(dataDailies.symbol)
 
         watchlist.currValue += parseValue(dataDailies.values[0].close); // Current Value
         watchlist.prevValue += parseValue(dataDailies.previousClose); // Previous Value
@@ -125,7 +118,7 @@ const Dashboard = () => {
         watchlist.changePercent = parseValue((watchlist.currValue - watchlist.prevValue) / watchlist.prevValue * 100);  // Total Change in %
       }
       setWatchListValues(watchlist)
-      console.log("WATCHLIST: ", watchlist)
+      console.log("FINAL watchlist OBJ: ", watchlist)
     }
 
     fetchPortfolioData()
@@ -142,7 +135,7 @@ const Dashboard = () => {
       </div>
       
       <PortfolioTrendLine />
-      <Watchlist watchListValues={watchListValues} graphRange={graphRange} />
+      <Watchlist />
     </section>
   )
 }
