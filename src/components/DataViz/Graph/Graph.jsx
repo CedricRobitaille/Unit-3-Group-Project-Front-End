@@ -70,7 +70,7 @@ const Graph = (props) => {
         const fetchData = async () => {
             //fetch data
             const apiData = await index(ticker, recordCount);
-            console.log(apiData.values);
+            // console.log(apiData.values);
 
             // Transform data
             const transformedData = apiData.values.map(item => ({

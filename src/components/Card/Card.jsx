@@ -24,7 +24,7 @@ const Card = (props) => {
           </div>
         </div>
 
-        <div className="card-text">{cardText}</div>
+        <div className="card-text"><p>${cardText}</p></div>
 
       </div>
     </div>

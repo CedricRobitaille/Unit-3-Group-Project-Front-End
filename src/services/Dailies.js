@@ -9,7 +9,7 @@ const index = async (ticker, recordCount = 1) => {
   try {
     const response = await fetch(`${BASE_URL}${ticker}?recordCount=${recordCount}`);
     const data = await response.json();
-    console.log(`Found dailies for ${ticker}: `, data);
+    // console.log(`Found dailies for ${ticker}: `, data);
     return data;
   } catch (error) {
     console.log(error)

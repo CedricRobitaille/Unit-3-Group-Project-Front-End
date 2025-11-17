@@ -31,14 +31,13 @@
 }
 
 .card-header-container {
-  height: 29px;
-  width: 165px;
-  padding: 4px 4px 4px 12px;
+  width: fit-content;
+  padding: .25rem .25rem .25rem .875rem;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   gap: 1rem;
   background-color: var(--black-50);
-  border-radius: 61px;
+  border-radius: 4rem;
 }
 
 .card-text {
@@ -48,14 +47,11 @@
 
 .card-pill-container {
   background-color: var(--black-90);
-  height: 21px;
-  min-width: 63px;
   padding: 4px 8px;
   border-radius: 12px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 4px;
+  gap: 8px;
 }
 
 .card-pill-text {
@@ -70,7 +66,7 @@
 .card-pill-container .arrow-down {
   color: var(--accent-50);
   font-family: "Space Grotesk", sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
 }
 
 .card-pill-container .arrow-down {
