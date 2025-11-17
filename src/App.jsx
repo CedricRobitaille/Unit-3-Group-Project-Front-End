@@ -4,6 +4,8 @@ import './App.css'
 import SideNav from './components/Nav/SideNav/SideNav'
 import TopNav from './components/Nav/TopNav/TopNav';
 import Watchlist from './components/Watchlist/Watchlist';
+import PortfolioTrendLine from './components/PortfolioTrendLine/PortfolioTrendLine';
+
 
 function App() {
 
@@ -28,6 +30,7 @@ function App() {
         />
         <section>
           <Watchlist />
+          <PortfolioTrendLine />
         </section> 
       </main>
     </>
