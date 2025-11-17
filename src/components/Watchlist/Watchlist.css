@@ -3,8 +3,9 @@
   padding: 3px;
   background-color: var(--black-90);
   border-radius: 13px;
-  max-height: calc(100vh - 5rem);
+  max-height: calc(100vh - 18.25rem);
   display: flex;
+  grid-area: watchlist;
 }
 
 .watchlist-inner {
