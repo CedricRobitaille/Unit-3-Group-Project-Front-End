@@ -72,7 +72,7 @@ const Graph = (props) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const loadData = () => {
+        const loadData = async () => {
             //fetch data
             const apiData = await index(ticker, recordCount);
             // console.log(apiData.values);

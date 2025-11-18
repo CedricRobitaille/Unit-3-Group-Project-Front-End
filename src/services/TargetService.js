@@ -5,7 +5,6 @@ const BASE_URL = "http://localhost:3000/targets/";
  * @returns All watchlist targets
  */
 const index = async () => {
-  console.log("THIS")
   try {
     const response = await fetch(BASE_URL);
     const data = await response.json()
@@ -24,17 +23,18 @@ const index = async () => {
  * @returns The added target's data
  */
 const create = async (targetName) => {
+  console.log(targetName)
   try {
     const response = await fetch(BASE_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(targetName),
+      body: JSON.stringify({targetName}),
     });
     const data = await response.json();
     console.log("Added Target to Watchlist: ", data);
-    return data;
+    return true;
   } catch (error) {
     console.log(error);
   }
@@ -90,13 +90,15 @@ const update = async (targetId, targetData) => {
  * @param {String} targetId ID of the transaction in question
  * @returns Deleted Transaction Information
  */
-const del = async (targetId) => {
+const del = async (ticker) => {
+  console.log("this")
   try {
-    const response = await fetch(`${BASE_URL}${targetId}`, {
+    const response = await fetch(`${BASE_URL}${ticker}`, {
       method: "DELETE"
     });
     const data = await response.json();
-    console.log(`Deleted Target ${targetId} from Watchlist: `, data);
+    console.log(`Deleted Target ${ticker} from Watchlist: `, data);
+    return true;
   } catch (error) {
     console.log(error);
   }

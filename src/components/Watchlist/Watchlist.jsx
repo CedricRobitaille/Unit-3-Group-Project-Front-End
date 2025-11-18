@@ -6,13 +6,13 @@ import WatchlistSection from "./WatchlistSection/WatchlistSection"
 import fetchDaily from "../../services/Dailies.js"
 import { index as fetchWatchlist } from "../../services/TargetService.js"
 
-const Watchlist = () => {
+const Watchlist = ({ handleWatchlistChange, watchListValues }) => {
 
   // Default recommendation to help users get started!
   const recommendations = ["AAPL", "NVDA", "MSFT", "AMZN", "GOOG", "TSLA", "AMD", "NFLX", "META", "COST", "WMT"]
 
+  console.log(watchListValues)
   // States containing arrays of watchlist elements
-  const [wishlistSaved, setWishlistSaved] = useState([]) // Saved by the user
   const [wishlistRecommendations, setWishlistRecommendations] = useState() // Recommended by the server
   const [wishlistSearch, setWishlistSearch] = useState() // Searched by the user/server
   
@@ -67,20 +67,6 @@ const Watchlist = () => {
     }
 
     /**
-     * Loads and formats the saved pairs into the `wishlistSaved` state
-     */
-    const loadSavedPairs = async (watchlistTickers) => {
-      const savedPairsArray = []; // Default array for the formatted saved pairs.
-
-      // Go through each element from the user's saved watchlist array.
-      for (const pair of watchlistTickers) {
-        const parsedPair = parseData(await fetchDaily(pair,90));  // Parse the data so that it can be consumed.
-        savedPairsArray.push(parsedPair); // Add the completed pair to the collection of user's pairs.
-      }
-      setWishlistSaved(savedPairsArray) // Set the state to showcase the saved pairs.
-    }
-
-    /**
      * Fetches the tickers from within the user's watchlist.
      * Once fetched, it passed it to the loadSavedPairs and loadRecommendations function.
      */
@@ -92,10 +78,9 @@ const Watchlist = () => {
         const ticker = element.ticker;  // Grabs the ticker value from the element
         watchlistTickers.push(ticker) // Adds the ticker to the array.
       })
-
-      loadSavedPairs(watchlistTickers);
       loadRecommendations(watchlistTickers);
     }
+    
 
     fetchWatchlistTickers();
   }, [])
@@ -107,9 +92,9 @@ const Watchlist = () => {
       <div className="watchlist-inner">
         <WatchlistHeader handleSearchResults={handleSearchResults} />
         <div className="watchlist-results">
-          { wishlistSearch && <WatchlistSection header="Search Results" watchlistElements={wishlistSearch} /> }
-          <WatchlistSection header="Saved Pairs" watchlistElements={wishlistSaved} />
-          { wishlistRecommendations && <WatchlistSection header="Recommendations" watchlistElements={wishlistRecommendations} /> }
+          {wishlistSearch && <WatchlistSection header="Search Results" watchlistElements={wishlistSearch} handleWatchlistChange={handleWatchlistChange} type="add" /> }
+          <WatchlistSection header="Saved Pairs" watchlistElements={watchListValues} handleWatchlistChange={handleWatchlistChange} type="remove" />
+          {wishlistRecommendations && <WatchlistSection header="Recommendations" watchlistElements={wishlistRecommendations} handleWatchlistChange={handleWatchlistChange} type="add" /> }
         </div>
       </div>
     </ section>
