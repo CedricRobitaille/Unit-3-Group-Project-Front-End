@@ -71,8 +71,7 @@ const Graph = (props) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const loadData = () => {
-            console.log(`searchData: ${searchData}`)
+        const loadData = async () => {
             //fetch data
             // const apiData = await index(props.ticker, props.recordCount);
             // console.log(apiData.values);

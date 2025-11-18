@@ -18,7 +18,7 @@ const PortfolioHeader = ({ handleGraphRange }) => {
 
       <div className="header-controls">
         {controls.map((number, index) => (
-          <button key={index} className={index === selected && "selected"} onClick={() => { handleControlClick(number, index) }}>{number}d</button>
+          <button key={index} className={index === selected ? "selected" : null} onClick={() => { handleControlClick(number, index) }}>{number}d</button>
         ))}
       </div>
     </header>
