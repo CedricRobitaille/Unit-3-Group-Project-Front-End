@@ -11,7 +11,6 @@ import {
     Area
 } from 'recharts';
 import { useState, useEffect } from 'react'
-import index from '../../../services/Dailies.js'
 import './Graph.css'
 
 // Format date for display
@@ -74,7 +73,7 @@ const Graph = (props) => {
     useEffect(() => {
         const loadData = async () => {
             //fetch data
-            const apiData = await index(ticker, recordCount);
+            // const apiData = await index(props.ticker, props.recordCount);
             // console.log(apiData.values);
 
             // Transform data
@@ -90,7 +89,7 @@ const Graph = (props) => {
             setData(transformedData);
         };
 
-        loadData();
+        loadData(searchData);
     }, []);
 
     return (

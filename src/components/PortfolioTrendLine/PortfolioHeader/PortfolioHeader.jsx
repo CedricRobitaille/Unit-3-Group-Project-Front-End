@@ -8,7 +8,6 @@ const PortfolioHeader = ({ handleGraphRange }) => {
   const [selected, setSelected] = useState(0)
 
   const handleControlClick = (value, index) => {
-    
     setSelected(index)
     handleGraphRange(value)
   }

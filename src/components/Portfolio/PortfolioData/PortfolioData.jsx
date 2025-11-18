@@ -1,46 +1,59 @@
 import { useState } from "react";
 import "./PortfolioData.css"
 import { useEffect } from "react";
+import dailiesIndex from "../../../services/Dailies.js";
+import * as transactions from "../../../services/TransactionService.js";
 
 const PortfolioData = (props) => {
 
-  const tempData = [
-    { "_id": "001", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": 0.25, "purchasePrice": "244.242" }, 
-    { "_id": "002", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "003", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "004", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "005", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "006", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "007", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "008", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "009", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "010", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "011", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "012", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "013", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "014", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "015", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "016", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "017", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "018", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "019", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "020", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }, 
-    { "_id": "021", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" },
-    { "_id": "022", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" },
-    { "_id": "023", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" },
-    { "_id": "024", "shareCount": "27", "ticker": "AAPL", "currentPrice": "262.521", "change": -21.24, "purchasePrice": "244.242" }
-  ];
-
-  const [data, setData] = useState([]);
+  const {buttonAction, data, setData} = props;
 
   useEffect(() => {
-    const getData = async () => {
-      // let response = await fetch(BASE_URL + ``)
-      // let JSONdata = await response.json()
 
-      // console.log(JSONdata)
-      // setData(JSONdata);
-      setData(tempData);
+    const getData = async () => {
+      let myTransactions = await transactions.index();
+      console.log(myTransactions);
+
+      // Get unique tickers from transactions
+      const tickers = [...new Set(myTransactions.map(t => t.ticker))];
+      
+      // Fetch daily data for each ticker and await all promises
+      const dailyDataPromises = tickers.map(ticker => dailiesIndex(ticker));
+      const dailyDataResults = await Promise.all(dailyDataPromises);
+      
+      console.log("Daily data results:", dailyDataResults); // Debug log
+      
+      // Create a map of ticker to current price
+      const priceMap = {};
+      dailyDataResults.forEach(data => {
+        console.log("Processing data:", data); // Debug log
+        if (data && data.values && data.values.length > 0) {
+          priceMap[data.symbol.toLowerCase()] = data.values[0].close; // Use lowercase for consistency
+        }
+      });
+      
+      console.log("Price map:", priceMap); // Debug log
+
+      // Transform the transactions to match tempData format
+      const formattedTransactions = myTransactions.map(transaction => {
+        const currentPrice = priceMap[transaction.ticker.toLowerCase()] || 0;
+        const purchasePrice = parseFloat(transaction.purchasePrice);
+        const change = currentPrice > 0 ? 
+          ((currentPrice - purchasePrice) / purchasePrice * 100).toFixed(2) : 
+          -100;
+        
+        return {
+          _id: transaction._id,
+          shareCount: transaction.shareCount.toString(),
+          ticker: transaction.ticker,
+          currentPrice: currentPrice.toString(),
+          change: parseFloat(change),
+          purchasePrice: transaction.purchasePrice.toString()
+        };
+      });
+
+      console.log("Formatted transactions:", formattedTransactions);
+      setData(formattedTransactions);
     }
 
     getData()
@@ -53,14 +66,24 @@ const PortfolioData = (props) => {
       return (<div key={item._id} className="row">
         <div className="cell">{item.shareCount}</div>
         <div className="cell">{item.ticker}</div>
-        <div className="cell">{(item.currentPrice).toLocaleString('en')}</div>
+        <div className="cell">
+          ${parseFloat(item.currentPrice)
+            .toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+          }
+
+        </div>
         { item.change < 0 ? 
           <div className="cell negative">{ item.change }</div> :
           <div className="cell positive">{ item.change }</div>
         }
-        <div className="cell">{item.purchasePrice}</div>
+        <div className="cell">
+          ${parseFloat(item.purchasePrice)
+            .toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+          }
+
+        </div>
         <div className="cell last">
-          <button>
+          <button onClick={() => buttonAction(item._id)}>
             Sell
           </button>
         </div>
