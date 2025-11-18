@@ -1,0 +1,79 @@
+.portfolio-data-outer {
+  width: 100%;
+  padding: 3px;
+  background-color: var(--black-90);
+  border-radius: 13px;
+  height: calc(100vh - 7rem);
+  display: flex;
+  flex-grow: 1;
+}
+
+.portfolio-data-inner {
+  background-color: var(--black-80);
+  border: 1.5px solid var(--black-50);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.portfolio-data-header {
+  border-bottom: 1.5px solid var(--black-50);
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+}
+
+.table-data {
+  overflow: auto;
+  height: calc(100vh - 19rem);
+}
+
+.data-table-container {
+  padding: 1rem;
+  color: var(--white-75);
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 5% 1fr 1fr 1fr 1fr auto;
+    border-bottom: 1px solid var(--black-60);
+    align-items: center;
+}
+
+.header-row {
+  align-items: flex-start;
+  color: var(--white-50);
+}
+
+.cell {
+  padding: 0.5rem 0;
+}
+
+.cell > button {
+  background-color: var(--black-90);
+  color: var(--white-100);
+  border: 1.5px solid var(--black-50);
+  border-radius: 32px;
+  padding: 4px 12px;
+}
+
+.cell.positive {
+  color: var(--accent-50);
+}
+
+.cell.negative {
+  color: var(--accent-2nd);
+}
+
+.cell.last {
+  padding-right: 0.5rem;
+}

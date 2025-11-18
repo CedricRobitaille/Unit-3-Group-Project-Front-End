@@ -1,0 +1,6 @@
+.portfolio-data {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+}

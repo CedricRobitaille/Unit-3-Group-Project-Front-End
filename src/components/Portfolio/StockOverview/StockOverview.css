@@ -1,0 +1,27 @@
+.stock-overview-outer {
+  max-width: 100%;
+  padding: 3px;
+  background-color: var(--black-90);
+  border-radius: 13px;
+  height: calc(100vh - 7rem);
+  display: flex;
+}
+
+.stock-overview-inner {
+  background-color: var(--black-80);
+  border: 1.5px solid var(--black-50);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 100%;
+}
+
+.stock-overview-results {
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  scrollbar-width: thin;
+}
