@@ -18,3 +18,31 @@
     max-height: 100%;
 
 }
+.card-top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--white-25);
+}
+
+.range-picker-container {
+    display: flex;
+    gap: 5px;
+    height: 100%;
+}
+
+.range-picker {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;  
+    color: var(--white-100);
+    font-size: 1rem;
+}
+
+.range-picker:active {
+    border-bottom: 1px solid var(--accent-50);
+}
