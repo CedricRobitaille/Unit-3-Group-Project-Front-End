@@ -121,5 +121,6 @@ input {
 
 #root > main > section {
   /* border: 5px solid green; */
+  padding: 2rem
 }
 

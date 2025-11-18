@@ -1,0 +1,33 @@
+.card-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  padding: .25rem .5rem 0rem .5rem;
+  border-bottom: 1.5px solid var(--black-50)
+}
+
+.card-header h1 {
+  font-size: 2rem;
+  padding-bottom: 1rem
+}
+
+.header-controls {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.header-controls button {
+  padding: 1rem .5rem;
+  font-weight: 600;
+  color: var(--white-50);
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+}
+
+.header-controls .selected {
+  border-bottom: 2px solid var(--accent-50);
+  color: var(--white-100);
+}

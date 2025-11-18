@@ -138,6 +138,14 @@ const Dashboard = () => {
     fetchWatchlistData()
   }, [])
 
+
+  const handleGraphRange = (newRange) => {
+    console.log("Setting new graph range to: ", newRange)
+    setGraphRange(newRange)
+    // ! TODO -> Create functions to reload portfolio / watchlist based on the new graphRange
+  }
+
+
   return (
     <section className='dashboard-view'>
       <div className="card-container">
@@ -147,7 +155,11 @@ const Dashboard = () => {
         <Card pillText="Watchlist Change" pillData={watchListValues.changePercent} cardText={watchListValues.changeValue} />
       </div>
       
+<<<<<<< HEAD
       <PortfolioTrendLine type='large' searchData={portfolioValues.totalledDailies}/>
+=======
+      <PortfolioTrendLine handleGraphRange={handleGraphRange} />
+>>>>>>> f366b031c7f8fc3a087db45495af251ed1ced970
       <Watchlist watchListValues={watchListValues} graphRange={graphRange} />
     </section>
   )

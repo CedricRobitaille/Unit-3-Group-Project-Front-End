@@ -1,12 +1,24 @@
 
 // import { useState, useEffect } from 'react'
 import Graph from '../DataViz/Graph/Graph';
+import PortfolioHeader  from "./PortfolioHeader/PortfolioHeader"
 import './PortfolioTrendLine.css'
 // import { index } from '../../services/TransactionService';
 // import fetchDaily from '../../services/Dailies';
 
 
+<<<<<<< HEAD
 const PortfolioTrendLine = (props) => {
+=======
+
+
+const PortfolioTrendLine = ({ handleGraphRange }) => {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchTransactionsData = async () => {
+            // const dateToday = new Date();
+>>>>>>> f366b031c7f8fc3a087db45495af251ed1ced970
 
 
 
@@ -80,6 +92,7 @@ const PortfolioTrendLine = (props) => {
 
     //         // console.log(`timestamp obj: ${JSON.stringify(portfolioDailyData.find(obj => obj.hasOwnProperty('1763130600')))}`);
 
+<<<<<<< HEAD
 
 
 
@@ -89,16 +102,19 @@ const PortfolioTrendLine = (props) => {
 
 
     //         setData(transactions)
+=======
+            setData(transactions)
+>>>>>>> f366b031c7f8fc3a087db45495af251ed1ced970
 
     //     };
     //     fetchTransactionsData();
 
     // }, []);
 
-
     return (
         <section className="portfolio-tend-line-outer">
             <div className="portfolio-tend-line-inner">
+<<<<<<< HEAD
                 <div className="card-top-container">
                     <h2>Protfolio Summary</h2>
                     <form onChange={handleRangeSelection} className="range-picker-container">
@@ -110,6 +126,10 @@ const PortfolioTrendLine = (props) => {
 
                 </div>
                 <Graph type='large' searchData={props.searchData} />
+=======
+                <PortfolioHeader handleGraphRange={handleGraphRange} />
+                <Graph type='large' searchData={data} />
+>>>>>>> f366b031c7f8fc3a087db45495af251ed1ced970
             </div>
         </section>
     );
