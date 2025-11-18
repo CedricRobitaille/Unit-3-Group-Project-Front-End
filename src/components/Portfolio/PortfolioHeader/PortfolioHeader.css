@@ -1,0 +1,11 @@
+.portfolio-header {
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-bottom: 1.5px solid var(--black-50);
+}
+
+.stock-modal-title {
+  font-size: 1.75rem;
+}

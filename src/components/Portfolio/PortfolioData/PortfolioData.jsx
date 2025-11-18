@@ -4,64 +4,9 @@ import { useEffect } from "react";
 import dailiesIndex from "../../../services/Dailies.js";
 import * as transactions from "../../../services/TransactionService.js";
 
-const PortfolioData = (props) => {
+const PortfolioData = ({ buttonAction, transactionData}) => {
 
-  const {buttonAction, data, setData} = props;
-
-  useEffect(() => {
-
-    const getData = async () => {
-      let myTransactions = await transactions.index();
-      console.log(myTransactions);
-
-      // Get unique tickers from transactions
-      const tickers = [...new Set(myTransactions.map(t => t.ticker))];
-      
-      // Fetch daily data for each ticker and await all promises
-      const dailyDataPromises = tickers.map(ticker => dailiesIndex(ticker));
-      const dailyDataResults = await Promise.all(dailyDataPromises);
-      
-      console.log("Daily data results:", dailyDataResults); // Debug log
-      
-      // Create a map of ticker to current price
-      const priceMap = {};
-      dailyDataResults.forEach(data => {
-        console.log("Processing data:", data); // Debug log
-        if (data && data.values && data.values.length > 0) {
-          priceMap[data.symbol.toLowerCase()] = data.values[0].close; // Use lowercase for consistency
-        }
-      });
-      
-      console.log("Price map:", priceMap); // Debug log
-
-      // Transform the transactions to match tempData format
-      const formattedTransactions = myTransactions.map(transaction => {
-        const currentPrice = priceMap[transaction.ticker.toLowerCase()] || 0;
-        const purchasePrice = parseFloat(transaction.purchasePrice);
-        const change = currentPrice > 0 ? 
-          ((currentPrice - purchasePrice) / purchasePrice * 100).toFixed(2) : 
-          -100;
-        
-        return {
-          _id: transaction._id,
-          shareCount: transaction.shareCount.toString(),
-          ticker: transaction.ticker,
-          currentPrice: currentPrice.toString(),
-          change: parseFloat(change),
-          purchasePrice: transaction.purchasePrice.toString()
-        };
-      });
-
-      console.log("Formatted transactions:", formattedTransactions);
-      setData(formattedTransactions);
-    }
-
-    getData()
-
-  }, []);
-
-  const portfolioTable = data.map(
-    (item, index) => {
+  const portfolioTable = transactionData.map((item, index) => {
 
       return (<div key={item._id} className="row">
         <div className="cell">{item.shareCount}</div>

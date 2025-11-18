@@ -4,7 +4,7 @@ import './App.css'
 import SideNav from './components/Nav/SideNav/SideNav'
 import TopNav from './components/Nav/TopNav/TopNav';
 import Dashboard from './components/Dashboard/Dashboard';
-
+import Portfolio from "./components/Portfolio/Portfolio"
 
 function App() {
 
@@ -27,8 +27,8 @@ function App() {
           currentSection={currentSection}
           currentPage={currentPage}
         />
-        <Dashboard />
-        
+        {/* <Dashboard /> */}
+        < Portfolio />
       </main>
     </>
   )

@@ -1,11 +1,19 @@
 import "./StockOverview.css"
+import PortfolioHeader from "../../Portfolio/PortfolioHeader/PortfolioHeader";
+import TransactionForm from "../TransactionForm/TransactrionForm";
 
-const StockOverview = (props) => {
+const StockOverview = () => {
+
+  
 
   return (
     <div className="stock-overview-outer">
       <div className="stock-overview-inner">
-        <h1>Stock Overview</h1>
+        <PortfolioHeader />
+
+        {/* Check if a stock is being worked on, if no, put in a "find a stock" */}
+
+        <TransactionForm />
       </div>
     </div>
   )
