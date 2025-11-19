@@ -38,7 +38,7 @@ const SideNav = (props) => {
                 Portfolio
               </button>
             </li>
-            <li>
+            {/* <li>
               <button 
                 onClick={() => { handleNavigation("General", "MarketData") }}
                 className={currentPage === "MarketData" ? "active" : ""}
@@ -46,7 +46,7 @@ const SideNav = (props) => {
                 <div className="icon"></div>
                 Market Data
               </button>
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className="preferences">
