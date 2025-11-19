@@ -15,14 +15,12 @@ import './Graph.css'
 
 // Format date for display
 const formatDate = (timestamp) => {
-    // console.log(`timestamp: ${timestamp}`)
-    const date = new Date(timestamp * 1000).toLocaleDateString('en-US', {
+    const fixedDate = new Date(timestamp * 1000).toLocaleDateString('en-US', {
         // year: 'numeric', 
         month: 'short',
         day: '2-digit'
     });
-    // console.log(`tickDate ${date}`);
-    return date;
+    return fixedDate;
 };
 
 // Custom Tooltip Component
@@ -59,83 +57,64 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const Graph = (props) => {
-    const searchData = props.searchData;
+    // const searchData = props.searchData;
     const type = props.type;
 
-    // console.log(`type: ${type}, searchData: ${JSON.stringify(searchData)}`);
+    // Safety check and create reversed copy instead of mutating
+    const searchData = props.searchData && Array.isArray(props.searchData) 
+        ? [...props.searchData].reverse() 
+        : [];
     
-    // const ticker = 'AAPL';
-    // const recordCount = 100;
+    if (searchData.length === 0) {
+        return <div className="graph">No data available</div>;
+    }
 
-    //data state
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        const loadData = () => {
-            console.log(`searchData: ${searchData}`)
-            //fetch data
-            // const apiData = await index(props.ticker, props.recordCount);
-            // console.log(apiData.values);
-
-            // Transform data
-            const transformedData = searchData.map(item => ({
-                timestamp: item.timestampId,
-                high: item.high,
-                low: item.low,
-                close: item.close
-            }));
-
-            // console.log(`transformedData: ${transformedData}`)
-
-            setData(transformedData);
-        };
-
-        loadData(searchData);
-    }, []);
+    console.log(`type: ${type}, searchData:`, searchData);
+    // console.log('sortedData: ', sortedData);
 
     return (
         <div className="graph">
-            <div className="w-full h-screen bg-gray-50 p-8">
-                <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
-                    {/* <h1 className="text-2xl font-bold text-gray-800 mb-2">Recharts - OHLC Data</h1>
+            {/* <div className="w-full h-screen bg-gray-50 p-8"> */}
+            {/* <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6"> */}
+            {/* <h1 className="text-2xl font-bold text-gray-800 mb-2">Recharts - OHLC Data</h1>
                     <p className="text-gray-600 mb-6">High/Low range with Close price line</p> */}
 
-                    <ResponsiveContainer width="100%" height={type === 'small' ? 50 : 400}>
-                        <ComposedChart data={data} margin={type === 'small' ? {top: 5, left: 5, bottom: 5, right: 5} : {top: 20, right: 15}}>
-                            {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                            <XAxis
-                                dataKey="timestamp"
-                                tickFormatter={formatDate}
-                                angle={-45}
-                                textAnchor="end"
-                                tick={{ fill: '#3DFFC5'  }}
-                                stroke='none'
-                                label=""
-                                height={80}
-                                interval={15}
-                                hide={type === 'small' ? true : false}
-                            />
-                            <YAxis
-                                datakey='close'
-                                domain={['dataMin - 5', 'dataMax + 5']}
-                                tick={{ fill: '#3DFFC5' }}
-                                stroke='none'
-                                allowDecimals={false}
-                                tickFormatter={(value) => {
-                                    return value % 1 === 0 ? value : value.toFixed(1);
-                                }}
-                                hide={type === 'small' ? true : false}
-                            />
-                            {type === 'small' ? '' : <Tooltip 
-                                content={<CustomTooltip />}
-                                cursor={{ stroke: '#3DFFC5', strokeWidth: 1, strokeDasharray: '5 5' }}
-                            
-                            />}
-                            
-                            {/* <Legend /> */}
+            <ResponsiveContainer width="100%" height="100%">
+                <ComposedChart data={searchData} margin={type === 'small' ? { top: 5, left: 5, bottom: 5, right: 5 } : { top: 20, right: 15 }}>
+                    {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                    <XAxis
+                        dataKey="timestampId"
+                        tickFormatter={formatDate}
+                        angle={-45}
+                        textAnchor="end"
+                        tick={{ fill: '#3DFFC5' }}
+                        stroke='none'
+                        label=""
+                        height={80}
+                        interval={1}
+                        hide={type === 'small' ? true : false}
+                    />
+                    <YAxis
+                        datakey='close'
+                        domain={['dataMin - 5', 'dataMax + 5']}
+                        tick={{ fill: '#3DFFC5' }}
+                        stroke='none'
+                        allowDecimals={false}
+                        tickFormatter={(value) => {
+                            return value % 1 === 0 ? value : value.toFixed(1);
+                        }}
+                        hide={type === 'small' ? true : false}
+                    />
+                    {type === 'small' ? '' : <Tooltip
+                        content={<CustomTooltip />}
+                        cursor={{ stroke: '#3DFFC5', strokeWidth: 1, strokeDasharray: '5 5' }}
 
-                            {/* Close line */}
-                            {/* <Line
+                    />}
+
+                    {/* <Legend /> */}
+
+                    {/* Close line */}
+                    {/* <Line
                                 type="monotone"
                                 dataKey='close'
                                 stroke='#3DFFC5'
@@ -144,44 +123,44 @@ const Graph = (props) => {
                                 legendType="none"
 
                             /> */}
-                            {/* High line - lighter */}
-                            <Line
-                                type="monotone"
-                                dataKey="high"
-                                stroke="#3DFFC5"
-                                strokeWidth={1}
-                                strokeOpacity={0.4}
-                                dot={false}
-                                name="High"
-                                hide={type === 'small' ? true : false}
-                            />
+                    {/* High line - lighter */}
+                    <Line
+                        type="monotone"
+                        dataKey="high"
+                        stroke="#3DFFC5"
+                        strokeWidth={1}
+                        strokeOpacity={0.4}
+                        dot={false}
+                        name="High"
+                        hide={type === 'small' ? true : false}
+                    />
 
-                            {/* Low line - lighter */}
-                            <Line
-                                type="monotone"
-                                dataKey="low"
-                                stroke="#3DFFC5"
-                                strokeWidth={1}
-                                strokeOpacity={0.4}
-                                dot={false}
-                                name="Low"
-                                hide={type === 'small' ? true : false}
-                            />
+                    {/* Low line - lighter */}
+                    <Line
+                        type="monotone"
+                        dataKey="low"
+                        stroke="#3DFFC5"
+                        strokeWidth={1}
+                        strokeOpacity={0.4}
+                        dot={false}
+                        name="Low"
+                        hide={type === 'small' ? true : false}
+                    />
 
-                            {/* Close price line - solid and prominent */}
-                            <Line
-                                type="monotone"
-                                dataKey='close'
-                                stroke='#3DFFC5'
-                                strokeWidth={2}
-                                dot={false}
-                                activeDot={type === 'small' ? false : { r: 6, fill: '#3DFFC5', stroke: '#fff', strokeWidth: 2 }}
-                                name="Close"
-                            />
-                        </ComposedChart>
-                    </ResponsiveContainer>
+                    {/* Close price line - solid and prominent */}
+                    <Line
+                        type="monotone"
+                        dataKey='close'
+                        stroke='#3DFFC5'
+                        strokeWidth={2}
+                        dot={false}
+                        activeDot={type === 'small' ? false : { r: 6, fill: '#3DFFC5', stroke: '#fff', strokeWidth: 2 }}
+                        name="Close"
+                    />
+                </ComposedChart>
+            </ResponsiveContainer>
 
-                    {/* <div className="mt-6 p-4 bg-blue-50 rounded">
+            {/* <div className="mt-6 p-4 bg-blue-50 rounded">
                         <h3 className="font-semibold text-gray-800 mb-2">Key Changes for OHLC Data:</h3>
                         <ul className="text-sm text-gray-700 space-y-1">
                             <li>• Used ComposedChart to combine Area and Line charts</li>
@@ -191,8 +170,8 @@ const Graph = (props) => {
                             <li>• Date formatting for timestamps</li>
                         </ul>
                     </div> */}
-                </div>
-            </div>
+            {/* </div> */}
+            {/* </div> */}
         </div>
 
     );

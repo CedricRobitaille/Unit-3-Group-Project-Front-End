@@ -17,14 +17,12 @@ const Dashboard = () => {
     prevValue: 0,
     changePercent: 0,
     changeValue: 0,
-    totalledDailies: []
   })
   const [watchListValues, setWatchListValues] = useState({
     currValue: 0,
     prevValue: 0,
     changePercent: 0,
     changeValue: 0,
-    tickers: [],
     targets: []
   })
 
@@ -39,9 +37,7 @@ const Dashboard = () => {
 
     // Fetches all values for the portfolio!
     const fetchPortfolioData = async () => {
-      console.log(`in fetchportfoliodata`)
       const portfolioData = await fetchTransactions(); // Should have: `purchasePrice`, `shareCount`, and `ticker`
-      console.log(`portfolioData: ${JSON.stringify(portfolioData)}`);
 
       // Initialize the portfolio Obj
       const portfolio = {
@@ -57,7 +53,8 @@ const Dashboard = () => {
       for (const data of portfolioData) {
         // Get the dailies for the stock, with a range of `graphRange`
         const dataDailies = await fetchDaily(data.ticker, graphRange)
-         console.log(`dataDailies : ${JSON.stringify(dataDailies )}`);
+
+        console.log('dataDailies: ', dataDailies);
         
         // Add values from each owned stock into the portfolio object
         portfolio.currValue += (dataDailies.values[0].close * data.shareCount); // Current Value * Sharecount
@@ -68,9 +65,6 @@ const Dashboard = () => {
         })
       }
 
-      // ==================================================================
-      // ! ERIC - Below is where the combined `dailies` for the portfolio graph is happening
-      // ==================================================================
       // Merge all owned stocks dailies into a `totalledDailies` array (where every day is combined values for all stocks)
       for (let day = 0; day < graphRange; day++) {  // Iterrate through every day
         let closeTotal = 0;
@@ -91,7 +85,6 @@ const Dashboard = () => {
           low: lowTodal,
           timestampId: portfolio.allDailies[0].values[day].timestampId, // Keep track of the day
         })
-        console.log(`portfolio.totalledDailies: ${JSON.stringify(portfolio.totalledDailies)}`)
       }
       
       portfolio.currValue = parseValue(portfolio.currValue);
@@ -107,7 +100,6 @@ const Dashboard = () => {
     // Fetches all values from the user's Watchlist!
     // Data to be used in watchlist modal, and top-cards.
     const fetchWatchlistData = async () => {
-      console.log(`in fetchwatchlistdata`)
       const watchlistData = await fetchWatchlist()  // Grab all watchlist elements (All that comes is `ticker`)
 
       const watchlist = { // Default Structure/fallback values
@@ -116,14 +108,12 @@ const Dashboard = () => {
         changePercent: 0,
         changeValue: 0,
         targets: [],  // Holds all stocks's dailies, where each stock is a new index.
-        tickers: []
       }
 
       // Iterate through each watchlist element, and sum up values into the watchlist component.
       for (const target of watchlistData) {
         const dataDailies = await fetchDaily(target.ticker, graphRange)
         watchlist.targets.push(dataDailies)  // Keep all dailies
-        watchlist.tickers.push(dataDailies.symbol)
 
         watchlist.currValue += parseValue(dataDailies.values[0].close); // Current Value
         watchlist.prevValue += parseValue(dataDailies.previousClose); // Previous Value
@@ -131,7 +121,7 @@ const Dashboard = () => {
         watchlist.changePercent = parseValue((watchlist.currValue - watchlist.prevValue) / watchlist.prevValue * 100);  // Total Change in %
       }
       setWatchListValues(watchlist)
-      console.log("WATCHLIST: ", watchlist)
+      console.log("FINAL watchlist OBJ: ", watchlist)
     }
 
     fetchPortfolioData()
@@ -145,6 +135,10 @@ const Dashboard = () => {
     // ! TODO -> Create functions to reload portfolio / watchlist based on the new graphRange
   }
 
+  const handleWatchlistChange = (newTicker) => {
+    setWatchListValues(...watchListValues, newTicker)
+  }
+
 
   return (
     <section className='dashboard-view'>
@@ -154,12 +148,8 @@ const Dashboard = () => {
         <Card pillText="Watchlist" pillData={watchListValues.changePercent} cardText={watchListValues.currValue} />
         <Card pillText="Watchlist Change" pillData={watchListValues.changePercent} cardText={watchListValues.changeValue} />
       </div>
-      
-<<<<<<< HEAD
-      <PortfolioTrendLine type='large' searchData={portfolioValues.totalledDailies}/>
-=======
-      <PortfolioTrendLine handleGraphRange={handleGraphRange} />
->>>>>>> f366b031c7f8fc3a087db45495af251ed1ced970
+
+      <PortfolioTrendLine type='large' handleGraphRange={handleGraphRange} searchData={portfolioValues.totalledDailies} />
       <Watchlist watchListValues={watchListValues} graphRange={graphRange} />
     </section>
   )
