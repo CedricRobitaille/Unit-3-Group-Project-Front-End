@@ -89,7 +89,7 @@ const Graph = (props) => {
             setData(transformedData);
         };
 
-        loadData(searchData);
+        loadData();
     }, []);
 
     return (

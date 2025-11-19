@@ -2,7 +2,7 @@ import "./PortfolioHeader.css"
 import { useState } from "react";
 import fetchDaily from "../../../services/Dailies.js"
 
-const PortfolioHeader = () => {
+const PortfolioHeader = ({ handleSearchResults }) => {
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -13,7 +13,8 @@ const PortfolioHeader = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault()
     console.log("Searching for: ", searchValue)
-    console.log(await fetchDaily(searchValue, 90))
+    const searchResults = await fetchDaily(searchValue, 90)
+    handleSearchResults(searchResults)
   }
 
   return (

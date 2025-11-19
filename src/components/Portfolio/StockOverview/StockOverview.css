@@ -1,5 +1,7 @@
 .stock-overview-outer {
-  max-width: 100%;
+  width: 100%;
+  width: 28rem;
+  max-width: 28rem;
   padding: 3px;
   background-color: var(--black-90);
   border-radius: 13px;
@@ -25,3 +27,5 @@
   gap: 1rem;
   scrollbar-width: thin;
 }
+
+

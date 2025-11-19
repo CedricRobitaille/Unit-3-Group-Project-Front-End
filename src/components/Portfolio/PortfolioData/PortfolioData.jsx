@@ -1,16 +1,12 @@
-import { useState } from "react";
 import "./PortfolioData.css"
-import { useEffect } from "react";
-import dailiesIndex from "../../../services/Dailies.js";
-import * as transactions from "../../../services/TransactionService.js";
 
-const PortfolioData = ({ buttonAction, transactionData}) => {
+const PortfolioData = ({ buttonAction, transactionData, handleEdit }) => {
 
-  const portfolioTable = transactionData.map((item, index) => {
+  const portfolioTable = transactionData.map((item) => {
 
-      return (<div key={item._id} className="row">
-        <div className="cell">{item.shareCount}</div>
-        <div className="cell">{item.ticker}</div>
+  return (<div key={item._id} className="row" onClick={() => {handleEdit(item._id)}}>
+    <div className="cell">{item.shareCount}</div>
+      <div className="cell">{item.ticker}</div>
         <div className="cell">
           ${parseFloat(item.currentPrice)
             .toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
