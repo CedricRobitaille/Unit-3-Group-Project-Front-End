@@ -1,19 +1,16 @@
-
 import { useState, useEffect } from 'react'
 import Graph from '../DataViz/Graph/Graph';
 import PortfolioHeader from "./PortfolioHeader/PortfolioHeader"
 import './PortfolioTrendLine.css'
 
+const PortfolioTrendLine = ({ type, handleGraphRange, searchData }) => {
+    console.log(`portfolioTrendLine searchDat: ${searchData}`)
 
-
-
-const PortfolioTrendLine = ({ handleGraphRange }) => {
-    const [data, setData] = useState([]);
     return (
         <section className="portfolio-tend-line-outer">
             <div className="portfolio-tend-line-inner">
                 <PortfolioHeader handleGraphRange={handleGraphRange} />
-                <Graph type='large' searchData={data} />
+                <Graph type={type} searchData={searchData} />
             </div>
         </section>
     );
