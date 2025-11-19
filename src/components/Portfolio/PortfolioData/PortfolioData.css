@@ -39,7 +39,7 @@
 .table {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    /* padding: 1rem; */
 }
 
 .row {
@@ -47,6 +47,12 @@
     grid-template-columns: 5% 1fr 1fr 1fr 1fr auto;
     border-bottom: 1px solid var(--black-60);
     align-items: center;
+    cursor: pointer;
+    padding: 0 1rem;
+}
+
+.row:hover {
+  background-color: var(--accent-10);
 }
 
 .header-row {

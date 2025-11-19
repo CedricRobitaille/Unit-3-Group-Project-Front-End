@@ -1,0 +1,128 @@
+.stock-form {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 1.5rem;
+}
+
+.stock-form button {
+  width: 100%;
+  padding: .75rem 1rem;
+  background-color: transparent;
+  color: var(--accent-50);
+  border: 1.5px solid var(--accent-50);
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: .125s
+}
+
+.stock-form button:hover {
+  background-color: var(--accent-50);
+  color: var(--black-100);
+}
+
+.stock-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.stock-modal-body header {
+  padding-bottom: 1rem;
+  border-bottom: 1.5px solid var(--black-50);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem
+}
+
+.graph-elem {
+  border: 1.5px solid var(--accent-30);
+  padding: 1rem;
+  border-radius: .5rem;
+}
+
+.stock-information {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+}
+
+.stock-information h4 {
+  font-size: 1.75rem;
+}
+
+.stock-information p {
+  font-size: .85rem;
+  color: var(--white-50)
+}
+
+.input-collection {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.input-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+label {
+  font-size: 1rem;
+  color: var(--white-50);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.input {
+  width: 100%;
+  background-color: var(--black-60);
+  padding: .5rem 1rem .5rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--accent-30);
+}
+
+.input::placeholder {
+  color: var(--white-75);
+}
+
+.input:focus {
+  outline: none;
+  border: 1.5px solid var(--accent-50);
+}
+
+fieldset {
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1.5px solid var(--black-50);
+}
+
+
+/* For Chrome, Safari, Edge, and Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* General for other browsers (though the above cover most modern ones) */
+input[type="number"] {
+  appearance: textfield;
+}

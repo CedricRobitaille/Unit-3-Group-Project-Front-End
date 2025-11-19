@@ -57,7 +57,6 @@ const Dashboard = () => {
         const dataDailies = await fetchDaily(data.ticker, graphRange)
 
         console.log('dataDailies: ', dataDailies);
-        
         // Add values from each owned stock into the portfolio object
         portfolio.currValue += (dataDailies.values[0].close * data.shareCount); // Current Value * Sharecount
         portfolio.prevValue += (dataDailies.previousClose * data.shareCount); // Yesterday's Value * Sharecount

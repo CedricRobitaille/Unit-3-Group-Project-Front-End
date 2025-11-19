@@ -57,7 +57,7 @@ h1, h2, h3 {
   font-style: normal;
 }
 
-h4, h5, h6, p, li, ul, a, input, select, textarea {
+h4, h5, h6, p, li, ul, a, input, select, textarea, label {
   color: var(--white-100);
 
   font-family: "Roboto", sans-serif;

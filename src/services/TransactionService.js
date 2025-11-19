@@ -95,6 +95,7 @@ const del = async (transactionId) => {
     });
     const data = await response.json();
     console.log(`Deleted transaction ${transactionId}: `, data);
+    return true
   } catch (error) {
     console.log(error);
   }
