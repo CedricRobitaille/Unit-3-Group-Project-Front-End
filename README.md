@@ -1,3 +1,5 @@
+- **Backend Repository**: [https://github.com/CedricRobitaille/Unit-3-Group-Project-Back-End](https://github.com/CedricRobitaille/Unit-3-Group-Project-Back-End)
+  
 # Loxley.com - Stock Portfolio Management Platform
 
 A modern, full-stack stock trading and portfolio management application that allows users to track their investments, view real-time stock data, and manage their watchlist.
