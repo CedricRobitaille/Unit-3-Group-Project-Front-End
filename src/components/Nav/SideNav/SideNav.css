@@ -1,12 +1,12 @@
 aside .side-nav {
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
   border-right: 0.06rem solid #2A2E2D;
   background-color: var(--black-90);
 }
 
 aside .side-nav {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
   gap: 2rem;
   height: 100%;
 }
@@ -19,20 +19,40 @@ aside .side-nav button {
   border: none;
   cursor: pointer;
   border-radius: 0.5rem;
+  border: 1.5px solid var(--black-90);
 }
 
 .side-nav ul {
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
 
-.side-nav ul button:hover,
+.side-nav :not(.logo) ul button:hover {
+  background-color: var(--accent-10);
+  color: var(--white-75)
+}
+
+
 .side-nav ul button.active {
-  background-color: var(--black-80);
+  border: 1.5px solid var(--accent-40);
+  color: var(--white-75)
+}
+
+.side-nav ul button:hover .icon,
+.side-nav ul button.active .icon {
+  border: 2px solid var(--white-75)
 }
 
 .side-nav h5 {
   color: var(--white-50);
   margin-bottom: 0.7rem;
+}
+
+.side-nav .logo {
+  padding-bottom: 1.5rem;
+  border-bottom: 1.5px solid var(--black-60);
 }
 
 .side-nav .general {
@@ -42,14 +62,9 @@ aside .side-nav button {
 .side-nav .logo,
 .side-nav .general,
 .side-nav .preferences {
-  height: 3rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-.side-nav .preferences {
-  margin-bottom: 5rem;
 }
 
 .side-nav .logo button {

@@ -56,7 +56,6 @@ const Dashboard = () => {
         // Get the dailies for the stock, with a range of `graphRange`
         const dataDailies = await fetchDaily(data.ticker, graphRange)
 
-        console.log('dataDailies: ', dataDailies);
         // Add values from each owned stock into the portfolio object
         portfolio.currValue += (dataDailies.values[0].close * data.shareCount); // Current Value * Sharecount
         portfolio.prevValue += (dataDailies.previousClose * data.shareCount); // Yesterday's Value * Sharecount
@@ -93,7 +92,7 @@ const Dashboard = () => {
       portfolio.changeValue = parseValue(portfolio.currValue - portfolio.prevValue);
       portfolio.changePercent = parseValue((portfolio.currValue - portfolio.prevValue) / portfolio.prevValue * 100); // Expression is to find the change in percentage between 2 numbers.
       setPortfolioValues(portfolio) // Set the portfolio obj!
-      console.log("PORTFOLIO: ", portfolio)
+      console.log("FINAL Portfolio OBJ : ", portfolio)
     }
 
 
@@ -112,25 +111,15 @@ const Dashboard = () => {
         targets: [],  // Holds all stocks's dailies, where each stock is a new index.
       }
 
-      console.log('watchlistData.entries(): ', watchlistData)
-
       // Iterate through each watchlist element, and sum up values into the watchlist component.
       for (let [index, target] of watchlistData.entries()) {
-        console.log(`target.ticker: ${target.ticker}`);
         const dataDailies = await fetchDaily(target.ticker, graphRange)
-        console.log("CheckThis",dataDailies)
         
         watchlist.tickers.push(dataDailies.symbol)
         watchlist.currValue += parseValue(dataDailies.values[0].close); // Current Value
         watchlist.prevValue += parseValue(dataDailies.previousClose); // Previous Value
         watchlist.changeValue = parseValue(watchlist.currValue - watchlist.prevValue);  // Total Change in $
         watchlist.changePercent = parseValue((watchlist.currValue - watchlist.prevValue) / watchlist.prevValue * 100);  // Total Change in %
-      
-
-        console.log(`test 1: ${watchlist.currValue}`)
-        console.log(`test 2: ${watchlist.prevValue}`)
-        console.log(`test 3: ${watchlist.changeValue}`)
-        console.log(`test 4: ${watchlist.changePercent}`)
 
 
         watchlist.targets.push({})
@@ -206,44 +195,12 @@ const Dashboard = () => {
     portfolio.changeValue = parseValue(portfolio.currValue - portfolio.prevValue);
     portfolio.changePercent = parseValue((portfolio.currValue - portfolio.prevValue) / portfolio.prevValue * 100); // Expression is to find the change in percentage between 2 numbers.
     setPortfolioValues(portfolio) // Set the portfolio obj!
-    console.log("PORTFOLIO: ", portfolio)
+    console.log("FINAL Portfolio OBJ: ", portfolio)
   }
 
 
-  const handleWatchlistUpdate = async (range = graphRange, watchlistTickers = watchListValues.tickers) => {
+  const handleWatchlistUpdate = async () => {
     handleWatchlistChange();
-    // const watchlist = { // Default Structure/fallback values
-    //   tickers: [],
-    //   currValue: 0,
-    //   prevValue: 0,
-    //   changePercent: 0,
-    //   changeValue: 0,
-    //   targets: [],  // Holds all stocks's dailies, where each stock is a new index.
-    // }
-    // for (let [index, target] of watchlistTickers.entries()) {
-    //   const dataDailies = await fetchDaily(target, range)
-
-      
-    //   watchlist.tickers.push(dataDailies.symbol)
-    //   watchlist.currValue += parseValue(dataDailies.values[0].close); // Current Value
-    //   watchlist.prevValue += parseValue(dataDailies.previousClose); // Previous Value
-    //   watchlist.changeValue = parseValue(watchlist.currValue - watchlist.prevValue);  // Total Change in $
-    //   watchlist.changePercent = parseValue((watchlist.currValue - watchlist.prevValue) / watchlist.prevValue * 100);  // Total Change in %
-
-    //   watchlist.targets.push({})
-    //   watchlist.targets[index].name = dataDailies.longName;
-    //   watchlist.targets[index].ticker = dataDailies.symbol;
-    //   watchlist.targets[index].value = dataDailies.values[0].close.toFixed(2);
-    //   watchlist.targets[index].change = (dataDailies.values[0].close - dataDailies.previousClose).toFixed(3)
-    //   watchlist.targets[index].searchData = [];
-    //   // watchlist.targets[index].values = [];
-    //   for (let day = 0; day < range; day++) {
-    //     console.log("THIS")
-    //     watchlist.targets[index].searchData.push(dataDailies.values[day])  // Keep all dailies
-    //   }
-    // }
-    // setWatchListValues(watchlist)
-    // console.log("FINAL watchlist OBJ: ", watchlist)
   }
 
 
@@ -251,7 +208,6 @@ const Dashboard = () => {
 
 
   const handleGraphRange = (newRange) => {
-    console.log("Setting new graph range to: ", newRange)
     setGraphRange(newRange)
 
     handlePortfolioUpdate(newRange)
@@ -261,7 +217,6 @@ const Dashboard = () => {
 
 
   const handleWatchlistChange = async () => {
-    console.log("Update")
     const watchlistData = await fetchWatchlist()  // Grab all watchlist elements (All that comes is `ticker`)
 
     const watchlist = { // Default Structure/fallback values
@@ -276,7 +231,6 @@ const Dashboard = () => {
     // Iterate through each watchlist element, and sum up values into the watchlist component.
     for (let [index, target] of watchlistData.entries()) {
       const dataDailies = await fetchDaily(target.ticker, graphRange)
-      console.log("CheckThis", dataDailies)
 
       watchlist.tickers.push(dataDailies.symbol)
       watchlist.currValue += parseValue(dataDailies.values[0].close); // Current Value
@@ -295,7 +249,6 @@ const Dashboard = () => {
       }
     }
     setWatchListValues(watchlist)
-    console.log("FINAL watchlist OBJ: ", watchlist)
   }
 
  

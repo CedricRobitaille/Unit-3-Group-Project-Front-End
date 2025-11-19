@@ -11,7 +11,7 @@ const Watchlist = ({ handleWatchlistChange, watchListValues }) => {
   // Default recommendation to help users get started!
   const recommendations = ["AAPL", "NVDA", "MSFT", "AMZN", "GOOG", "TSLA", "AMD", "NFLX", "META", "COST", "WMT"]
 
-  console.log(watchListValues)
+  console.log("Saved Watchlist Values: ", watchListValues)
   // States containing arrays of watchlist elements
   const [wishlistRecommendations, setWishlistRecommendations] = useState() // Recommended by the server
   const [wishlistSearch, setWishlistSearch] = useState() // Searched by the user/server

@@ -5,8 +5,6 @@ import {create, update} from "../../../services/TransactionService.js"
 
 const TransactionForm = ({ stockInfo, handlePurchase }) => {
 
-
-  console.log("INNER",stockInfo)
   const [formValues, setFormValues] = useState({
     qty: stockInfo.qty ? stockInfo.qty : 1,
     price: parseFloat(stockInfo.values[0].close.toFixed(3))
@@ -40,13 +38,12 @@ const TransactionForm = ({ stockInfo, handlePurchase }) => {
     }
 
     if (response) {
-      console.log("PURCHASED",await response)
       handlePurchase()
     } else {
       console.log("ERROR, Could not purchase stock.")
     }
     
-    // console.log(parsedInfo);
+
   }
   
 
@@ -66,7 +63,6 @@ const TransactionForm = ({ stockInfo, handlePurchase }) => {
       })
     }
   }
-
 
   return (
     <article className="stock-modal-body">

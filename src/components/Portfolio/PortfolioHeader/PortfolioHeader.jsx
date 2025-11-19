@@ -12,7 +12,6 @@ const PortfolioHeader = ({ handleSearchResults }) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault()
-    console.log("Searching for: ", searchValue)
     const searchResults = await fetchDaily(searchValue, 90)
     handleSearchResults(searchResults)
   }

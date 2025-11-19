@@ -4,7 +4,6 @@ import PortfolioHeader from "./PortfolioHeader/PortfolioHeader"
 import './PortfolioTrendLine.css'
 
 const PortfolioTrendLine = ({ type, handleGraphRange, searchData }) => {
-    console.log(`portfolioTrendLine searchDat: ${searchData}`)
 
     return (
         <section className="portfolio-tend-line-outer">
