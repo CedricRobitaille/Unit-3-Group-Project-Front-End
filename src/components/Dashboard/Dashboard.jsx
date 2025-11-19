@@ -17,14 +17,12 @@ const Dashboard = () => {
     prevValue: 0,
     changePercent: 0,
     changeValue: 0,
-    totalledDailies: []
   })
   const [watchListValues, setWatchListValues] = useState({
     currValue: 0,
     prevValue: 0,
     changePercent: 0,
     changeValue: 0,
-    tickers: [],
     targets: []
   })
 
@@ -39,9 +37,7 @@ const Dashboard = () => {
 
     // Fetches all values for the portfolio!
     const fetchPortfolioData = async () => {
-      console.log(`in fetchportfoliodata`)
       const portfolioData = await fetchTransactions(); // Should have: `purchasePrice`, `shareCount`, and `ticker`
-      console.log(`portfolioData: ${JSON.stringify(portfolioData)}`);
 
       // Initialize the portfolio Obj
       const portfolio = {
@@ -58,6 +54,8 @@ const Dashboard = () => {
         // Get the dailies for the stock, with a range of `graphRange`
         const dataDailies = await fetchDaily(data.ticker, graphRange)
 
+        console.log('dataDailies: ', dataDailies);
+        
         // Add values from each owned stock into the portfolio object
         portfolio.currValue += (dataDailies.values[0].close * data.shareCount); // Current Value * Sharecount
         portfolio.prevValue += (dataDailies.previousClose * data.shareCount); // Yesterday's Value * Sharecount
@@ -87,7 +85,6 @@ const Dashboard = () => {
           low: lowTodal,
           timestampId: portfolio.allDailies[0].values[day].timestampId, // Keep track of the day
         })
-        console.log(`portfolio.totalledDailies: ${JSON.stringify(portfolio.totalledDailies)}`)
       }
       
       portfolio.currValue = parseValue(portfolio.currValue);
@@ -103,7 +100,6 @@ const Dashboard = () => {
     // Fetches all values from the user's Watchlist!
     // Data to be used in watchlist modal, and top-cards.
     const fetchWatchlistData = async () => {
-      console.log(`in fetchwatchlistdata`)
       const watchlistData = await fetchWatchlist()  // Grab all watchlist elements (All that comes is `ticker`)
 
       const watchlist = { // Default Structure/fallback values
@@ -288,6 +284,10 @@ const Dashboard = () => {
     }
     setWatchListValues(watchlist)
     console.log("FINAL watchlist OBJ: ", watchlist)
+  }
+
+  const handleWatchlistChange = (newTicker) => {
+    setWatchListValues(...watchListValues, newTicker)
   }
 
 
