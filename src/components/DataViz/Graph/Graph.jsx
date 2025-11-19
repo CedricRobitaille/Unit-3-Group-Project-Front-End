@@ -66,7 +66,7 @@ const Graph = (props) => {
     return (
         <div className="graph">
 
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="100%" minWidth="0" minHeight={undefined} >
                 <ComposedChart data={searchData} margin={type === 'small' ? { top: 5, left: 5, bottom: 5, right: 5 } : { top: 20, right: 15 }}>
                     {/* <CartesianGrid strokeDasharray="3 3" /> */}
                     <XAxis

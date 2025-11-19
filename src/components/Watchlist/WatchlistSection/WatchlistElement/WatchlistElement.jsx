@@ -24,13 +24,14 @@ const WatchlistElement = ({ elementData, handleWatchlistChange, type }) => {
   const handleAction = async () => {
     handleElementClick()
     if (type === "add") {
-      const response = await create(ticker)
+      console.log(ticker)
+      const response = await create(elementData.ticker)
       if (await response) {
         handleWatchlistChange() // Only update if this was a success
       }
     }
     if (type === "remove") {
-      const response = await del(ticker)
+      const response = await del(elementData.ticker)
       if (await response) {
         handleWatchlistChange() // Only update if this was a success
       }

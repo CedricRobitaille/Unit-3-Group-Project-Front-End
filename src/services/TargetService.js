@@ -30,7 +30,7 @@ const create = async (targetName) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({targetName}),
+      body: JSON.stringify({targetName: targetName}),
     });
     const data = await response.json();
     console.log("Added Target to Watchlist: ", data);
@@ -91,7 +91,7 @@ const update = async (targetId, targetData) => {
  * @returns Deleted Transaction Information
  */
 const del = async (ticker) => {
-  console.log("this")
+  console.log(ticker)
   try {
     const response = await fetch(`${BASE_URL}${ticker}`, {
       method: "DELETE"
