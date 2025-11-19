@@ -140,9 +140,9 @@ const Dashboard = () => {
         watchlist.targets[index].previousClose = dataDailies.previousClose;
         watchlist.targets[index].value = dataDailies.values[0].close.toFixed(2);
         watchlist.targets[index].change = (dataDailies.values[0].close - dataDailies.previousClose).toFixed(3)
-        watchlist.targets[index].values = []
+        watchlist.targets[index].searchData = []
         for (let day = 0; day < graphRange; day++) {
-          watchlist.targets[index].values.push(dataDailies.values[day])  // Keep all dailies
+          watchlist.targets[index].searchData.push(dataDailies.values[day])  // Keep all dailies
         }
       }
       setWatchListValues(watchlist)
@@ -212,38 +212,39 @@ const Dashboard = () => {
 
 
   const handleWatchlistUpdate = async (range = graphRange, watchlistTickers = watchListValues.tickers) => {
-    const watchlist = { // Default Structure/fallback values
-      tickers: [],
-      currValue: 0,
-      prevValue: 0,
-      changePercent: 0,
-      changeValue: 0,
-      targets: [],  // Holds all stocks's dailies, where each stock is a new index.
-    }
-    for (let [index, target] of watchlistTickers.entries()) {
-      const dataDailies = await fetchDaily(target, range)
+    handleWatchlistChange();
+    // const watchlist = { // Default Structure/fallback values
+    //   tickers: [],
+    //   currValue: 0,
+    //   prevValue: 0,
+    //   changePercent: 0,
+    //   changeValue: 0,
+    //   targets: [],  // Holds all stocks's dailies, where each stock is a new index.
+    // }
+    // for (let [index, target] of watchlistTickers.entries()) {
+    //   const dataDailies = await fetchDaily(target, range)
 
       
-      watchlist.tickers.push(dataDailies.symbol)
-      watchlist.currValue += parseValue(dataDailies.values[0].close); // Current Value
-      watchlist.prevValue += parseValue(dataDailies.previousClose); // Previous Value
-      watchlist.changeValue = parseValue(watchlist.currValue - watchlist.prevValue);  // Total Change in $
-      watchlist.changePercent = parseValue((watchlist.currValue - watchlist.prevValue) / watchlist.prevValue * 100);  // Total Change in %
+    //   watchlist.tickers.push(dataDailies.symbol)
+    //   watchlist.currValue += parseValue(dataDailies.values[0].close); // Current Value
+    //   watchlist.prevValue += parseValue(dataDailies.previousClose); // Previous Value
+    //   watchlist.changeValue = parseValue(watchlist.currValue - watchlist.prevValue);  // Total Change in $
+    //   watchlist.changePercent = parseValue((watchlist.currValue - watchlist.prevValue) / watchlist.prevValue * 100);  // Total Change in %
 
-      watchlist.targets.push({})
-      watchlist.targets[index].name = dataDailies.longName;
-      watchlist.targets[index].ticker = dataDailies.symbol;
-      watchlist.targets[index].value = dataDailies.values[0].close.toFixed(2);
-      watchlist.targets[index].change = (dataDailies.values[0].close - dataDailies.previousClose).toFixed(3)
-      watchlist.targets[index].searchData = [];
-      // watchlist.targets[index].values = [];
-      for (let day = 0; day < range; day++) {
-        console.log("THIS")
-        watchlist.targets[index].searchData.push(dataDailies.values[day])  // Keep all dailies
-      }
-    }
-    setWatchListValues(watchlist)
-    console.log("FINAL watchlist OBJ: ", watchlist)
+    //   watchlist.targets.push({})
+    //   watchlist.targets[index].name = dataDailies.longName;
+    //   watchlist.targets[index].ticker = dataDailies.symbol;
+    //   watchlist.targets[index].value = dataDailies.values[0].close.toFixed(2);
+    //   watchlist.targets[index].change = (dataDailies.values[0].close - dataDailies.previousClose).toFixed(3)
+    //   watchlist.targets[index].searchData = [];
+    //   // watchlist.targets[index].values = [];
+    //   for (let day = 0; day < range; day++) {
+    //     console.log("THIS")
+    //     watchlist.targets[index].searchData.push(dataDailies.values[day])  // Keep all dailies
+    //   }
+    // }
+    // setWatchListValues(watchlist)
+    // console.log("FINAL watchlist OBJ: ", watchlist)
   }
 
 
