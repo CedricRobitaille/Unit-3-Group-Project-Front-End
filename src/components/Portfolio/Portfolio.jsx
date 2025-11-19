@@ -101,6 +101,7 @@ const Portfolio = () => {
       value: parseFloat((await searchResults.values[0].close).toFixed(2)),
       change: parseFloat((await searchResults.values[0].close - await searchResults.previousClose).toFixed(3)),
       qty: stockValue.shareCount,
+      id: id
     }
 
     console.log("THIS ONE", stockData);

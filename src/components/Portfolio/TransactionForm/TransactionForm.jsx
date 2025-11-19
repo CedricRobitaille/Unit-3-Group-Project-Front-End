@@ -1,15 +1,24 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import "./TransactionForm.css"
 import Graph from "../../DataViz/Graph/Graph";
-import {create} from "../../../services/TransactionService.js"
+import {create, update} from "../../../services/TransactionService.js"
 
 const TransactionForm = ({ stockInfo, handlePurchase }) => {
 
+
   console.log("INNER",stockInfo)
   const [formValues, setFormValues] = useState({
-    qty: 1,
+    qty: stockInfo.qty ? stockInfo.qty : 1,
     price: parseFloat(stockInfo.values[0].close.toFixed(3))
   })
+
+  useEffect(() => {
+    setFormValues(prev => ({
+      ...prev,
+      qty: stockInfo.qty ?? prev.qty,
+      price: parseFloat(stockInfo.values[0].close.toFixed(3))
+    }));
+  }, [stockInfo]);
 
   const handlePurchaseRequest = async (event) => {
     event.preventDefault();
@@ -21,7 +30,15 @@ const TransactionForm = ({ stockInfo, handlePurchase }) => {
       purchaseDate: Date.now()
     }
 
-    const response = await create(formResults);
+    let response = null;
+    if (stockInfo.qty) {
+      const edited = await update(stockInfo.id, formResults);
+      response = await edited;
+    } else {
+      const created = await create(formResults);
+      response = await created;
+    }
+
     if (response) {
       console.log("PURCHASED",await response)
       handlePurchase()
@@ -110,7 +127,8 @@ const TransactionForm = ({ stockInfo, handlePurchase }) => {
           </div>
         </fieldset>
         
-        <button type="submit">Buy Stocks</button>
+        {stockInfo.qty ? <button type="submit">Exchange Stocks</button> : <button type="submit">Buy Stocks</button>}
+        
       </form>
     </article>
     
