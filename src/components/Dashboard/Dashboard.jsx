@@ -17,13 +17,15 @@ const Dashboard = () => {
     prevValue: 0,
     changePercent: 0,
     changeValue: 0,
+    totalledDailies: [],
   })
   const [watchListValues, setWatchListValues] = useState({
     currValue: 0,
     prevValue: 0,
     changePercent: 0,
     changeValue: 0,
-    targets: []
+    targets: [],
+    tickers: [],
   })
 
   // Cleans up a value to be consumable
@@ -111,8 +113,11 @@ const Dashboard = () => {
         targets: [],  // Holds all stocks's dailies, where each stock is a new index.
       }
 
+      console.log('watchlistData.entries(): ', watchlistData)
+
       // Iterate through each watchlist element, and sum up values into the watchlist component.
       for (let [index, target] of watchlistData.entries()) {
+        console.log(`target.ticker: ${target.ticker}`);
         const dataDailies = await fetchDaily(target.ticker, graphRange)
         console.log("CheckThis",dataDailies)
         
@@ -122,6 +127,13 @@ const Dashboard = () => {
         watchlist.changeValue = parseValue(watchlist.currValue - watchlist.prevValue);  // Total Change in $
         watchlist.changePercent = parseValue((watchlist.currValue - watchlist.prevValue) / watchlist.prevValue * 100);  // Total Change in %
       
+
+        console.log(`test 1: ${watchlist.currValue}`)
+        console.log(`test 2: ${watchlist.prevValue}`)
+        console.log(`test 3: ${watchlist.changeValue}`)
+        console.log(`test 4: ${watchlist.changePercent}`)
+
+
         watchlist.targets.push({})
         watchlist.targets[index].name = dataDailies.longName;
         watchlist.targets[index].ticker = dataDailies.symbol;
@@ -224,10 +236,10 @@ const Dashboard = () => {
       watchlist.targets[index].value = dataDailies.values[0].close.toFixed(2);
       watchlist.targets[index].change = (dataDailies.values[0].close - dataDailies.previousClose).toFixed(3)
       watchlist.targets[index].searchData = [];
-      watchlist.targets[index].values = [];
+      // watchlist.targets[index].values = [];
       for (let day = 0; day < range; day++) {
         console.log("THIS")
-        watchlist.targets[index].values.push(dataDailies.values[day])  // Keep all dailies
+        watchlist.targets[index].searchData.push(dataDailies.values[day])  // Keep all dailies
       }
     }
     setWatchListValues(watchlist)
@@ -286,9 +298,7 @@ const Dashboard = () => {
     console.log("FINAL watchlist OBJ: ", watchlist)
   }
 
-  const handleWatchlistChange = (newTicker) => {
-    setWatchListValues(...watchListValues, newTicker)
-  }
+ 
 
 
   return (
