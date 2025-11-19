@@ -5,7 +5,7 @@ const SideNav = (props) => {
   const {currentPage, handleNavigation} = props;
 
   return (
-    <aside>
+    <aside className="side-nav-container">
       <nav className="side-nav">
         <div className="logo">
         <ul> 

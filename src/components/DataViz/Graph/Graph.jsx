@@ -1,16 +1,11 @@
 import {
-    LineChart,
     Line,
     XAxis,
     YAxis,
-    CartesianGrid,
     Tooltip,
-    Legend,
     ResponsiveContainer,
     ComposedChart,
-    Area
 } from 'recharts';
-import { useState, useEffect } from 'react'
 import './Graph.css'
 
 // Format date for display
@@ -57,7 +52,6 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 const Graph = (props) => {
-    // const searchData = props.searchData;
     const type = props.type;
 
     // Safety check and create reversed copy instead of mutating
@@ -69,15 +63,8 @@ const Graph = (props) => {
         return <div className="graph">No data available</div>;
     }
 
-    console.log(`type: ${type}, searchData:`, searchData);
-    // console.log('sortedData: ', sortedData);
-
     return (
         <div className="graph">
-            {/* <div className="w-full h-screen bg-gray-50 p-8"> */}
-            {/* <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6"> */}
-            {/* <h1 className="text-2xl font-bold text-gray-800 mb-2">Recharts - OHLC Data</h1>
-                    <p className="text-gray-600 mb-6">High/Low range with Close price line</p> */}
 
             <ResponsiveContainer width="100%" height="100%">
                 <ComposedChart data={searchData} margin={type === 'small' ? { top: 5, left: 5, bottom: 5, right: 5 } : { top: 20, right: 15 }}>
@@ -111,19 +98,6 @@ const Graph = (props) => {
 
                     />}
 
-                    {/* <Legend /> */}
-
-                    {/* Close line */}
-                    {/* <Line
-                                type="monotone"
-                                dataKey='close'
-                                stroke='#3DFFC5'
-                                strokeWidth={1.5}
-                                dot={false}
-                                legendType="none"
-
-                            /> */}
-                    {/* High line - lighter */}
                     <Line
                         type="monotone"
                         dataKey="high"
@@ -160,20 +134,7 @@ const Graph = (props) => {
                 </ComposedChart>
             </ResponsiveContainer>
 
-            {/* <div className="mt-6 p-4 bg-blue-50 rounded">
-                        <h3 className="font-semibold text-gray-800 mb-2">Key Changes for OHLC Data:</h3>
-                        <ul className="text-sm text-gray-700 space-y-1">
-                            <li>• Used ComposedChart to combine Area and Line charts</li>
-                            <li>• Area shows the High-Low range visually</li>
-                            <li>• Close price emphasized with thicker line</li>
-                            <li>• Custom tooltip displays all three values</li>
-                            <li>• Date formatting for timestamps</li>
-                        </ul>
-                    </div> */}
-            {/* </div> */}
-            {/* </div> */}
         </div>
-
     );
 }
 
