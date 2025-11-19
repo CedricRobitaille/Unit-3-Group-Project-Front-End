@@ -16,6 +16,7 @@ const WatchlistElement = ({ elementData, handleWatchlistChange, type }) => {
   const value = elementData.value;
   const change = elementData.change;
   const searchData = elementData.searchData;
+  console.log(`Element searchData`, elementData)
 
   const handleElementClick = async () => {
     setButtonVisible(!buttonVisible)
